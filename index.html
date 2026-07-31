@@ -544,70 +544,42 @@
 
 <script>
 // === LIVE DATA: IHSG + USD/IDR ===
-async function fetchIHSG() {
+// Data di-embed oleh cron job server-side. Nilai di-update setiap jam.
+const LIVE_IHSG = {price: 6236.126, change: 49.76, pct: 0.8};
+const LIVE_USDIDR = {rate: 18084.7, updated: '31 Jul 2026 16:26'};
+
+function applyIHSG() {
   const el = document.getElementById('ihsg-value');
   const ch = document.getElementById('ihsg-change');
-  try {
-    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/%5EJKSE?interval=1d&range=1d');
-    const r = await fetch(proxyUrl);
-    const wrapper = await r.json();
-    const d = JSON.parse(wrapper.contents);
-    const meta = d.chart.result[0].meta;
-    const price = meta.regularMarketPrice.toLocaleString('id-ID');
-    const change = meta.regularMarketPrice - meta.previousClose;
-    const pct = ((change / meta.previousClose) * 100).toFixed(2);
-    const sign = change >= 0 ? '+' : '';
-    el.innerHTML = price;
-    el.style.webkitTextFillColor = '';
-    el.style.background = change >= 0 ? 'linear-gradient(135deg, var(--green), #22c55e)' : 'linear-gradient(135deg, var(--red), #ef4444)';
-    el.style.webkitBackgroundClip = 'text';
-    el.style.backgroundClip = 'text';
-    ch.textContent = `${sign}${change.toLocaleString('id-ID')} (${sign}${pct}%)`;
-    ch.className = 'sub ' + (change >= 0 ? 'up' : 'down');
-  } catch(e) {
-    el.textContent = '6.220';
-    ch.textContent = 'offline · data tunda';
-    ch.className = 'sub';
-  }
+  const price = LIVE_IHSG.price.toLocaleString('id-ID');
+  const sign = LIVE_IHSG.change >= 0 ? '+' : '';
+  el.innerHTML = price;
+  el.style.webkitTextFillColor = '';
+  el.style.background = LIVE_IHSG.change >= 0 ? 'linear-gradient(135deg, var(--green), #22c55e)' : 'linear-gradient(135deg, var(--red), #ef4444)';
+  el.style.webkitBackgroundClip = 'text';
+  el.style.backgroundClip = 'text';
+  ch.textContent = `${sign}${LIVE_IHSG.change.toLocaleString('id-ID')} (${sign}${LIVE_IHSG.pct}%)`;
+  ch.className = 'sub ' + (LIVE_IHSG.change >= 0 ? 'up' : 'down');
 }
 
-async function fetchUSDIDR() {
+function applyUSDIDR() {
   const el = document.getElementById('usdidr-value');
   const tm = document.getElementById('usdidr-time');
-  try {
-    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.exchangerate-api.com/v4/latest/USD');
-    const r = await fetch(proxyUrl);
-    const wrapper = await r.json();
-    const d = JSON.parse(wrapper.contents);
-    const rate = d.rates.IDR;
-    el.innerHTML = 'Rp ' + rate.toLocaleString('id-ID');
-    el.style.webkitTextFillColor = '';
-    el.style.background = 'linear-gradient(135deg, var(--accent), var(--accent2))';
-    el.style.webkitBackgroundClip = 'text';
-    el.style.backgroundClip = 'text';
-    const now = new Date();
-    tm.textContent = 'live · ' + now.toLocaleTimeString('id-ID', {hour:'2-digit',minute:'2-digit'});
-    tm.className = 'sub';
-  } catch(e) {
-    el.textContent = 'Rp 16.200';
-    tm.textContent = 'offline';
-    tm.className = 'sub';
-  }
+  el.innerHTML = 'Rp ' + LIVE_USDIDR.rate.toLocaleString('id-ID');
+  el.style.webkitTextFillColor = '';
+  el.style.background = 'linear-gradient(135deg, var(--accent), var(--accent2))';
+  el.style.webkitBackgroundClip = 'text';
+  el.style.backgroundClip = 'text';
+  tm.textContent = LIVE_USDIDR.updated;
+  tm.className = 'sub';
 }
 
-fetchIHSG();
-fetchUSDIDR();
-// Auto-refresh every 1 hour
-setInterval(fetchIHSG, 3600000);
-setInterval(fetchUSDIDR, 3600000);
+applyIHSG();
+applyUSDIDR();
 
 function refreshLiveData() {
-  document.getElementById('ihsg-value').innerHTML = '<span class="spinner"></span>';
-  document.getElementById('ihsg-change').textContent = '';
-  document.getElementById('usdidr-value').innerHTML = '<span class="spinner"></span>';
-  document.getElementById('usdidr-time').textContent = '';
-  fetchIHSG();
-  fetchUSDIDR();
+  // Data di-embed server-side, reload halaman untuk data terbaru
+  location.reload();
 }
 
 // === THEME TOGGLE ===
