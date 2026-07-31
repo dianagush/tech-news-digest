@@ -548,8 +548,10 @@ async function fetchIHSG() {
   const el = document.getElementById('ihsg-value');
   const ch = document.getElementById('ihsg-change');
   try {
-    const r = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5EJKSE?interval=1d&range=1d');
-    const d = await r.json();
+    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/%5EJKSE?interval=1d&range=1d');
+    const r = await fetch(proxyUrl);
+    const wrapper = await r.json();
+    const d = JSON.parse(wrapper.contents);
     const meta = d.chart.result[0].meta;
     const price = meta.regularMarketPrice.toLocaleString('id-ID');
     const change = meta.regularMarketPrice - meta.previousClose;
@@ -573,8 +575,10 @@ async function fetchUSDIDR() {
   const el = document.getElementById('usdidr-value');
   const tm = document.getElementById('usdidr-time');
   try {
-    const r = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-    const d = await r.json();
+    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.exchangerate-api.com/v4/latest/USD');
+    const r = await fetch(proxyUrl);
+    const wrapper = await r.json();
+    const d = JSON.parse(wrapper.contents);
     const rate = d.rates.IDR;
     el.innerHTML = 'Rp ' + rate.toLocaleString('id-ID');
     el.style.webkitTextFillColor = '';
