@@ -578,8 +578,40 @@ applyIHSG();
 applyUSDIDR();
 
 function refreshLiveData() {
-  // Data di-embed server-side, reload halaman untuk data terbaru
-  location.reload();
+  const ihsgEl = document.getElementById('ihsg-value');
+  const ihsgCh = document.getElementById('ihsg-change');
+  const usdEl = document.getElementById('usdidr-value');
+  const usdTm = document.getElementById('usdidr-time');
+  ihsgEl.innerHTML = '<span class="spinner"></span>';
+  ihsgCh.textContent = '';
+  usdEl.innerHTML = '<span class="spinner"></span>';
+  usdTm.textContent = '';
+
+  Promise.all([
+    fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5EJKSE?interval=1d&range=1d')
+      .then(r => r.json())
+      .then(d => {
+        const m = d.chart.result[0].meta;
+        const price = m.regularMarketPrice;
+        const prev = m.chartPreviousClose || m.previousClose || price;
+        const change = price - prev;
+        const pct = ((change / prev) * 100).toFixed(2);
+        LIVE_IHSG.price = price;
+        LIVE_IHSG.change = parseFloat(change.toFixed(2));
+        LIVE_IHSG.pct = parseFloat(pct);
+        applyIHSG();
+      }),
+    fetch('https://api.exchangerate-api.com/v4/latest/USD')
+      .then(r => r.json())
+      .then(d => {
+        LIVE_USDIDR.rate = d.rates.IDR;
+        LIVE_USDIDR.updated = 'live · ' + new Date().toLocaleTimeString('id-ID', {hour:'2-digit',minute:'2-digit'});
+        applyUSDIDR();
+      })
+  ]).catch(() => {
+    applyIHSG();
+    applyUSDIDR();
+  });
 }
 
 // === THEME TOGGLE ===
