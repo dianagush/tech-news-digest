@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech News Digest — Contoh Desain Editorial</title>
+<style>
+  /* ============ PALET EDITORIAL ============ */
+  :root, [data-theme="dark"] {
+    --bg: #121212;            /* hitam hangat, bukan navy */
+    --surface: #1a1a1a;
+    --surface2: #222222;
+    --border: #2e2e2e;
+    --text: #f0ece4;          /* krem */
+    --text2: #a8a29a;
+    --accent: #e0483e;        /* merah editorial */
+    --green: #1a7f4b;
+    --red: #c62828;
+    --blue: #1565c0;
+    --rule: #3a3a3a;
+  }
+  [data-theme="light"] {
+    --bg: #f4f1ea;            /* kertas */
+    --surface: #fffdf8;
+    --surface2: #efece4;
+    --border: #d8d2c6;
+    --text: #191714;
+    --text2: #6b655c;
+    --accent: #b3261e;
+    --green: #1a7f4b;
+    --red: #c62828;
+    --blue: #1565c0;
+    --rule: #c9c2b4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: background 0.25s, color 0.25s;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ============ TOP BAR ============ */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--text);
+    margin-bottom: 1.75rem;
+  }
+  .topbar .edition { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text2); }
+  .topbar .edition strong { color: var(--accent); font-weight: 700; }
+  .theme-toggle {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text); padding: 0.3rem 0.7rem;
+    font-size: 0.7rem; cursor: pointer; font-weight: 600;
+    border-radius: 2px; letter-spacing: 0.05em;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ============ MASTHEAD ============ */
+  header.masthead { text-align: center; padding: 1.25rem 0 1.5rem; }
+  .masthead .kicker {
+    font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 0.6rem;
+  }
+  .masthead h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800; letter-spacing: 0.01em; line-height: 1.05;
+    color: var(--text);
+  }
+  .masthead .window {
+    font-size: 0.78rem; color: var(--text2); margin-top: 0.5rem;
+    letter-spacing: 0.03em;
+  }
+  .masthead .window strong { color: var(--text); font-weight: 600; }
+  .rules { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; }
+  .rules .thick { flex: 1; border-top: 3px solid var(--text); }
+  .rules .thin { flex: 1; border-top: 1px solid var(--rule); }
+
+  /* ============ TICKER (live market) ============ */
+  .ticker {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 0.6rem 1rem; margin: 1.4rem 0;
+    background: var(--surface);
+    font-size: 0.78rem;
+  }
+  .ticker .item { display: flex; gap: 0.5rem; align-items: baseline; }
+  .ticker .label { color: var(--text2); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; }
+  .ticker .val { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ticker .chg.up { color: var(--green); }
+  .ticker .chg.down { color: var(--red); }
+  .ticker .updated { color: var(--text2); font-size: 0.62rem; }
+
+  /* ============ SLICERS (persegi, bukan pill) ============ */
+  .slicers-row {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin: 1.25rem 0 1.75rem;
+  }
+  .slicer-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text2); font-size: 0.72rem; font-weight: 600;
+    padding: 0.32rem 0.8rem; border-radius: 2px; cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+  .slicer-btn .count { opacity: 0.6; margin-left: 0.25rem; font-size: 0.62rem; }
+  .slicer-btn:hover { border-color: var(--accent); color: var(--text); }
+  .slicer-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+  /* ============ LEAD STORY ============ */
+  .lead {
+    border-top: 4px solid var(--text);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 0 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .lead .tag-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+  .lead .tag {
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .lead .tag-row::after { content: ''; flex: 1; border-top: 1px dotted var(--rule); }
+  .lead h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.4rem, 3.4vw, 2.1rem);
+    font-weight: 700; line-height: 1.2; margin-bottom: 0.6rem;
+  }
+  .lead p { color: var(--text2); font-size: 0.92rem; max-width: 75ch; }
+  .lead .meta {
+    margin-top: 0.7rem; font-size: 0.68rem; color: var(--text2);
+    display: flex; gap: 1rem;
+  }
+  .lead .meta .src { font-weight: 600; color: var(--text); }
+  .lead .meta .sent { font-weight: 600; }
+  .sent.up { color: var(--green); }
+  .sent.down { color: var(--red); }
+  .sent.neutral { color: var(--blue); }
+
+  /* ============ SECTION ============ */
+  .section {
+    margin: 1.9rem 0 0.6rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.05rem; font-weight: 700; white-space: nowrap;
+  }
+  .section .rule-thick { flex: 0 0 2.5rem; border-top: 3px solid var(--text); }
+  .section .rule-thin { flex: 1; border-top: 1px solid var(--rule); }
+
+  /* ============ NEWS GRID ============ */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.9rem;
+  }
+  .news-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1rem 1.05rem 0.9rem 1.15rem;
+    display: flex; flex-direction: column; gap: 0.35rem;
+    transition: border-color 0.15s;
+  }
+  .news-card:hover { border-color: var(--accent); }
+  .news-card.hidden { display: none; }
+  .news-card .stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+  .stripe-up { background: var(--green); }
+  .stripe-down { background: var(--red); }
+  .stripe-neutral { background: var(--blue); }
+  .news-card .tag {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text2);
+  }
+  .news-card .tag::after { content: ' ·'; color: var(--accent); }
+  .news-card h4 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.98rem; font-weight: 700; line-height: 1.32;
+  }
+  .news-card p { color: var(--text2); font-size: 0.78rem; line-height: 1.5; flex: 1; }
+  .news-card .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 0.5rem; padding-top: 0.5rem;
+    border-top: 1px dotted var(--rule);
+    font-size: 0.64rem; color: var(--text2);
+  }
+  .news-card .foot .read-more { color: var(--accent); font-weight: 600; }
+  .news-card .foot .read-more::after { content: ' →'; }
+
+  footer {
+    margin-top: 3rem; padding-top: 1rem;
+    border-top: 3px solid var(--text);
+    font-size: 0.68rem; color: var(--text2);
+    text-align: center; letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="edition">Edisi <strong>Rabu</strong> · 5 Agustus 2026</div>
+    <button class="theme-toggle" onclick="toggleTheme()">Tema terang</button>
+  </div>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="kicker">Ringkasan Harian</div>
+    <h1>Tech News Digest</h1>
+    <div class="window">Jendela berita <strong>4 Agu 11:00 — 5 Agu 2026 11:00</strong> WIB</div>
+    <div class="rules"><div class="thick"></div><div class="thin"></div></div>
+  </header>
+
+  <!-- LIVE TICKER -->
+  <div class="ticker">
+    <div class="item"><span class="label">IHSG</span><span class="val" id="ihsgVal">6.353,75</span><span class="chg up">▲ +34,14 (+0,54%)</span></div>
+    <div class="item"><span class="label">USD/IDR</span><span class="val" id="usdVal">18.015</span><span class="chg down">▼ -69,72</span></div>
+    <div class="item updated">Pembaruan: 05 Agu 15:23 WIB</div>
+  </div>
+
+  <!-- SLICERS -->
+  <div class="slicers-row" id="categorySlicers">
+    <button class="slicer-btn active" data-cat="all">Semua <span class="count">(8)</span></button>
+    <button class="slicer-btn" data-cat="gadget">Gadget <span class="count">(3)</span></button>
+    <button class="slicer-btn" data-cat="ai">AI <span class="count">(2)</span></button>
+    <button class="slicer-btn" data-cat="earnings">Earnings <span class="count">(2)</span></button>
+    <button class="slicer-btn" data-cat="chip">Chip <span class="count">(1)</span></button>
+  </div>
+
+  <!-- LEAD STORY -->
+  <div class="lead" data-cat="gadget">
+    <div class="tag-row"><span class="tag">Gadget · Headline</span></div>
+    <h2>Pixel 11 Series Dikonfirmasi 12 Agustus — Tensor G6 2nm &amp; Pixel Glow LED</h2>
+    <p>Google mengonfirmasi event Made by Google 12 Agustus: Pixel 11, 11 Pro, 11 Pro XL, dan 11 Pro Fold dengan Tensor G6 fabrikasi 2nm, storage dasar 256GB, serta fitur baru 'Pixel Glow' LED di bar kamera. Pre-order dibuka hari yang sama.</p>
+    <div class="meta">
+      <span class="src">Gizmochina, Android Central</span>
+      <span>04 Agu</span>
+      <span class="sent neutral">Sentimen: Netral</span>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div id="news-container">
+
+    <div class="section"><div class="rule-thick"></div><h3>Gadget &amp; Consumer Tech</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+      <div class="news-card" data-cat="gadget">
+        <div class="stripe stripe-neutral"></div>
+        <span class="tag">POCO</span>
+        <h4>POCO M8 Power 5G Resmi Meluncur — Baterai 8000mAh</h4>
+        <p>Layar 7 inci 120Hz, baterai 8000mAh, kamera 50MP, Snapdragon 4 Gen 4. Harga di bawah INR 20.000 (~$200).</p>
+        <div class="foot"><span>04 Agu · Gizmochina</span><a class="read-more" href="#" target="_blank">Baca</a></div>
+      </div>
+      <div class="news-card" data-cat="gadget">
+        <div class="stripe stripe-neutral"></div>
+        <span class="tag">Audio</span>
+        <h4>Headphone ANC Baru Menjamur Jelang Musim Gugur</h4>
+        <p>Deretan headphone peredam bising baru diumumkan — kompetisi harga makin ketat di segmen menengah.</p>
+        <div class="foot"><span>04 Agu · The Verge</span><a class="read-more" href="#" target="_blank">Baca</a></div>
+      </div>
+      <div class="news-card" data-cat="gadget">
+        <div class="stripe stripe-up"></div>
+        <span class="tag">EV</span>
+        <h4>Penjualan EV Indonesia Naik, Harga Baterai Terus Turun</h4>
+        <p>Adopsi kendaraan listrik domestik tumbuh; biaya sel baterai turun ke titik terendah baru tahun ini.</p>
+        <div class="foot"><span>03 Agu · Katadata</span><a class="read-more" href="#" target="_blank">Baca</a></div>
+      </div>
+    </div>
+
+    <div class="section"><div class="rule-thick"></div><h3>AI &amp; Large Language Models</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+      <div class="news-card" data-cat="ai">
+        <div class="stripe stripe-down"></div>
+        <span class="tag">OpenAI/Anthropic</span>
+        <h4>AI Agents Kembali Terlibat Breach Keamanan Baru</h4>
+        <p>Reuters melaporkan agen AI dari OpenAI dan Anthropic terimplikasi dalam gelombang breach baru, memperkuat seruan isolasi saat menguji model frontier.</p>
+        <div class="foot"><span>05 Agu · Reuters</span><a class="read-more" href="#" target="_blank">Baca</a></div>
+      </div>
+      <div class="news-card" data-cat="ai">
+        <div class="stripe stripe-up"></div>
+        <span class="tag">Alibaba Qwen</span>
+        <h4>Alibaba Rilis Model AI 'Paling Kuat' — Saham Rally</h4>
+        <p>Peluncuran model baru mengguncang pasar dan memicu rally saham. Babak baru persaingan model China melawan lab frontier AS.</p>
+        <div class="foot"><span>03 Agu · CNBC</span><a class="read-more" href="#" target="_blank">Baca</a></div>
+      </div>
+    </div>
+
+    <div class="section"><div class="rule-thick"></div><h3>Earnings &amp; Big Tech</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+      <div class="news-card" data-cat="earnings">
+        <div class="stripe stripe-down"></div>
+        <span class="tag">AMD</span>
+        <h4>AMD Q2: Revenue Naik 50%, Saham Tetap Turun</h4>
+        <p>Revenue naik 50% dan penjualan data center berlipat ganda, tapi panduan AI yang kurang mengguncang membuat saham terkoreksi.</p>
+        <div class="foot"><span>04 Agu · CNBC</span><a class="read-more" href="#" target="_blank">Baca</a></div>
+      </div>
+      <div class="news-card" data-cat="earnings">
+        <div class="stripe stripe-up"></div>
+        <span class="tag">Palantir</span>
+        <h4>Palantir Melonjak 29% — Revenue Komersial AS Tumbuh 150%</h4>
+        <p>Kuartal 'blowout': revenue komersial AS melonjak hampir 150%. Saham melesat 29% dan mendorong sektor teknologi ke level tertinggi.</p>
+        <div class="foot"><span>03-04 Agu · CNBC</span><a class="read-more" href="#" target="_blank">Baca</a></div>
+      </div>
+      <div class="news-card" data-cat="chip">
+        <div class="stripe stripe-up"></div>
+        <span class="tag">Samsung</span>
+        <h4>Samsung Luncurkan Teknologi AI Memory Generasi Baru</h4>
+        <p>Generasi baru teknologi memori AI untuk memperkuat posisi di pasar chip — bagian dari perlombaan HBM untuk klaster AI.</p>
+        <div class="foot"><span>04 Agu · Reuters</span><a class="read-more" href="#" target="_blank">Baca</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>Tech News Digest · Disusun otomatis oleh Hermes Agent · Data pasar: Yahoo Finance &amp; exchangerate-api</footer>
+</div>
+
+<script>
+  // ============ THEME TOGGLE ============
+  function toggleTheme() {
+    const root = document.documentElement;
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    document.querySelector('.theme-toggle').textContent = next === 'dark' ? 'Tema terang' : 'Tema gelap';
+  }
+
+  // ============ SLICER FILTER ============
+  const btns = document.querySelectorAll('.slicer-btn');
+  const cards = document.querySelectorAll('.news-card, .lead');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      cards.forEach(c => {
+        c.classList.toggle('hidden', cat !== 'all' && c.dataset.cat !== cat);
+      });
+    });
+  });
+</script>
+</body>
+</html>
