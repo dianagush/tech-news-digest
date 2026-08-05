@@ -285,13 +285,13 @@
 <!-- ====== NEWS SLICERS ====== -->
 <div class="slicers-row" id="categorySlicers">
   <button class="slicer-btn active" data-cat="all">🔥 Semua <span class="count">(20)</span></button>
-  <button class="slicer-btn" data-cat="ai">🤖 AI <span class="count">(4)</span></button>
-  <button class="slicer-btn" data-cat="earnings">💰 Earnings <span class="count">(4)</span></button>
-  <button class="slicer-btn" data-cat="chip">🔷 Chip <span class="count">(4)</span></button>
-  <button class="slicer-btn" data-cat="gadget">📱 Gadget <span class="count">(3)</span></button>
+  <button class="slicer-btn" data-cat="ai">🤖 AI <span class="count">(3)</span></button>
+  <button class="slicer-btn" data-cat="earnings">💰 Earnings <span class="count">(3)</span></button>
+  <button class="slicer-btn" data-cat="chip">🔷 Chip <span class="count">(3)</span></button>
+  <button class="slicer-btn" data-cat="gadget">📱 Gadget <span class="count">(7)</span></button>
   <button class="slicer-btn" data-cat="quantum">⚛️ Quantum <span class="count">(1)</span></button>
   <button class="slicer-btn" data-cat="policy">⚖️ Policy <span class="count">(2)</span></button>
-  <button class="slicer-btn" data-cat="other">📋 Lain-lain <span class="count">(2)</span></button>
+  <button class="slicer-btn" data-cat="other">📋 Lain-lain <span class="count">(1)</span></button>
 </div>
 
 <div id="news-container">
@@ -529,8 +529,8 @@
 <script>
 // === LIVE DATA: IHSG + USD/IDR ===
 // Data di-embed oleh cron job server-side. Nilai di-update setiap jam.
-const LIVE_IHSG = {price: 6355.105, change: 35.49, pct: 0.56};
-const LIVE_USDIDR = {rate: 18015.28, updated: '05 Aug 2026 15:19'};
+const LIVE_IHSG = {price: 6356.395, change: 36.78, pct: 0.58};
+const LIVE_USDIDR = {rate: 18015.28, updated: '05 Aug 2026 15:22'};
 
 function applyIHSG() {
   const el = document.getElementById('ihsg-value');
