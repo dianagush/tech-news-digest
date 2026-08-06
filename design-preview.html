@@ -259,6 +259,36 @@
   /* varian 7 — chip trace */
   .bg-chip .bg-layer { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e0483e' stroke-width='1'%3E%3Crect x='70' y='70' width='60' height='60'/%3E%3Cpath d='M70 85h-70M70 115h-70M85 70v-70M115 70v-70M130 85h70M130 115h70M85 130v70M115 130v70'/%3E%3Ccircle cx='40' cy='40' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='160' cy='40' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='40' cy='160' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='160' cy='160' r='2' fill='%23e0483e' stroke='none'/%3E%3C/g%3E%3C/svg%3E"); }
 
+  /* ============ MARKET TICKER (minimalis) ============ */
+  .ticker-section { margin: 1.1rem 0 1.4rem; }
+  .ticker-label {
+    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text2); margin-right: 0.5rem; white-space: nowrap;
+  }
+  .ticker-section .ticker {
+    display: flex; flex-wrap: wrap; gap: 0 1.4rem;
+    border: none; border-top: 1px solid var(--border);
+    background: transparent; padding: 0.55rem 0 0;
+    margin: 0.5rem 0 0; font-size: 0.75rem;
+  }
+  .ticker-item {
+    display: flex; align-items: baseline; gap: 0.4rem;
+    padding: 0.15rem 0;
+  }
+  .ticker-item .sym {
+    font-weight: 700; letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums; color: var(--text);
+  }
+  .ticker-item .change {
+    font-size: 0.72rem; font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  /* tanda naik / turun — segitiga + warna, konsisten dua tema */
+  .ticker-item .change.up { color: var(--green); }
+  .ticker-item .change.down { color: var(--red); }
+  .ticker-item .change.up::before { content: '▲ '; font-size: 0.62rem; }
+  .ticker-item .change.down::before { content: '▼ '; font-size: 0.62rem; }
+
   /* ============ STICKY SLICER BAR ============ */
   .slicers-row.sticky {
     position: sticky; top: 0; z-index: 100;

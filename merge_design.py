@@ -72,7 +72,12 @@ def extract_ticker(html, tid):
     else:
         body = rest[len(f'<div class="ticker" id="{tid}">'):nxt]
     items = re.findall(r'<div class="ticker-item">(.*?)</div>', body, re.S)
-    return "\n".join(f'    <div class="ticker-item">{it.strip()}</div>' for it in items)
+    # buang simbol ▲/▼ inline — panah kini dari CSS ::before (.change.up/.down)
+    cleaned = []
+    for it in items:
+        it = re.sub(r'(<span class="change (?:up|down)">)\s*[▲▼]\s*', r'\1', it)
+        cleaned.append(it.strip())
+    return "\n".join(f'    <div class="ticker-item">{it}</div>' for it in cleaned)
 
 ticker_us = extract_ticker(old_html, "ticker-us")
 ticker_id = extract_ticker(old_html, "ticker-id")
