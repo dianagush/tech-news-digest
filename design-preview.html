@@ -398,14 +398,38 @@
   </header>
 
   <!-- LIVE TICKER -->
-  <div class="ticker">
-    <div class="item"><span class="label">IHSG</span><span class="val" id="ihsgVal">6.353,75</span><span class="chg up">▲ +34,14 (+0,54%)</span></div>
-    <div class="item"><span class="label">USD/IDR</span><span class="val" id="usdVal">18.015</span><span class="chg down">▼ -69,72</span></div>
-    <div class="item updated">Pembaruan: 05 Agu 15:23 WIB</div>
+  <div class="ticker" role="region" aria-label="Data pasar terkini">
+    <div class="item"><span class="label">IHSG</span><span class="val" id="ihsg-value">…</span><span class="chg" id="ihsg-change"></span></div>
+    <div class="item"><span class="label">USD/IDR</span><span class="val" id="usdidr-value">…</span><span class="chg" id="usdidr-time"></span></div>
+    <button class="refresh-btn" onclick="refreshLiveData()" aria-label="Perbarui data pasar">⟳ Refresh</button>
+  </div>
+
+  <!-- MARKET TICKERS -->
+  <div class="ticker-section">
+    <div class="slicers-row" role="group" aria-label="Filter pasar saham">
+      <span class="ticker-label">Pergerakan saham 06 Agu 2026:</span>
+      <button class="slicer-btn active" data-ticker="all" onclick="filterTicker('all')">Semua</button>
+      <button class="slicer-btn" data-ticker="us" onclick="filterTicker('us')">US</button>
+      <button class="slicer-btn" data-ticker="id" onclick="filterTicker('id')">Indo</button>
+    </div>
+    <div class="ticker" id="ticker-us">
+      <div class="ticker-item"><span class="sym">MSFT</span><span class="change up">15%</span></div>
+      <div class="ticker-item"><span class="sym">META</span><span class="change down">8%</span></div>
+      <div class="ticker-item"><span class="sym">AMZN</span><span class="change up">5%</span></div>
+      <div class="ticker-item"><span class="sym">AAPL</span><span class="change down">2%</span></div>
+      <div class="ticker-item"><span class="sym">NVDA</span><span class="change up">3%</span></div>
+    </div>
+    <div class="ticker" id="ticker-id">
+      <div class="ticker-item"><span class="sym">IHSG</span><span class="change up">0.63%</span></div>
+      <div class="ticker-item"><span class="sym">TLKM</span><span class="change up">1.2%</span></div>
+      <div class="ticker-item"><span class="sym">GOTO</span><span class="change up">2.8%</span></div>
+      <div class="ticker-item"><span class="sym">BUKA</span><span class="change down">0.5%</span></div>
+      <div class="ticker-item"><span class="sym">EMTK</span><span class="change up">0.9%</span></div>
+    </div>
   </div>
 
   <!-- SLICERS -->
-  <div class="slicers-row" id="categorySlicers">
+  <div class="slicers-row sticky" id="categorySlicers" role="group" aria-label="Filter kategori berita">
     <button class="slicer-btn active" data-cat="all">Semua <span class="count">(8)</span></button>
     <button class="slicer-btn" data-cat="gadget">Gadget <span class="count">(3)</span></button>
     <button class="slicer-btn" data-cat="ai">AI <span class="count">(2)</span></button>
@@ -502,35 +526,99 @@
 </div>
 
 <script>
-  // ============ DAILY BACKGROUND (ganti tiap hari, konsisten sepanjang hari) ============
+  // ============ DAILY BACKGROUND ============
   (function () {
     const variants = ['bg-circuit', 'bg-dots', 'bg-hex', 'bg-scan', 'bg-blueprint', 'bg-signal', 'bg-chip'];
     const d = new Date();
-    // seed dari tanggal lokal YYYY-MM-DD → hash sederhana → pilih varian
     const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
-    const idx = seed % variants.length;
-    document.body.classList.add(variants[idx]);
+    document.body.classList.add(variants[seed % variants.length]);
   })();
 
-  // ============ THEME TOGGLE ============
+  // ============ THEME TOGGLE (ikon via CSS, simpan preferensi) ============
   function toggleTheme() {
     const root = document.documentElement;
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
-    // ikon matahari/bulan tampil otomatis via CSS [data-theme]
+    localStorage.setItem('hermes-news-theme', next);
+  }
+  (function() {
+    const saved = localStorage.getItem('hermes-news-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+  })();
+
+  // ============ LIVE DATA (mock untuk preview) ============
+  const LIVE_IHSG = {price: 6351.34, change: 0.63, pct: 0.01};
+  const LIVE_USDIDR = {rate: 17925.35, updated: '06 Agu 2026 11:28'};
+
+  function applyIHSG() {
+    const el = document.getElementById('ihsg-value');
+    const ch = document.getElementById('ihsg-change');
+    if (!el || !ch) return;
+    const price = LIVE_IHSG.price.toLocaleString('id-ID');
+    const sign = LIVE_IHSG.change >= 0 ? '+' : '';
+    el.textContent = price;
+    ch.textContent = `${sign}${LIVE_IHSG.change.toLocaleString('id-ID')} (${sign}${LIVE_IHSG.pct}%)`;
+    ch.className = 'chg ' + (LIVE_IHSG.change >= 0 ? 'up' : 'down');
   }
 
-  // ============ SLICER FILTER ============
-  const btns = document.querySelectorAll('.slicer-btn');
+  function applyUSDIDR() {
+    const el = document.getElementById('usdidr-value');
+    const tm = document.getElementById('usdidr-time');
+    if (!el || !tm) return;
+    el.textContent = 'Rp ' + LIVE_USDIDR.rate.toLocaleString('id-ID');
+    tm.textContent = LIVE_USDIDR.updated;
+  }
+
+  applyIHSG();
+  applyUSDIDR();
+
+  function refreshLiveData() {
+    const ihsgEl = document.getElementById('ihsg-value');
+    const ihsgCh = document.getElementById('ihsg-change');
+    const usdEl = document.getElementById('usdidr-value');
+    const usdTm = document.getElementById('usdidr-time');
+    if (ihsgEl) ihsgEl.innerHTML = '…';
+    if (ihsgCh) ihsgCh.textContent = '';
+    if (usdEl) usdEl.innerHTML = '…';
+    if (usdTm) usdTm.textContent = '';
+    setTimeout(() => { applyIHSG(); applyUSDIDR(); }, 800);
+  }
+
+  // ============ TICKER FILTER (US / Indo) ============
+  function filterTicker(region) {
+    document.querySelectorAll('[data-ticker]').forEach(b => b.classList.remove('active'));
+    const btn = document.querySelector(`[data-ticker="${region}"]`);
+    if (btn) btn.classList.add('active');
+    const us = document.getElementById('ticker-us');
+    const id = document.getElementById('ticker-id');
+    if (!us || !id) return;
+    if (region === 'all') { us.classList.remove('hidden'); id.classList.remove('hidden'); }
+    else if (region === 'us') { us.classList.remove('hidden'); id.classList.add('hidden'); }
+    else { us.classList.add('hidden'); id.classList.remove('hidden'); }
+  }
+
+  // ============ CATEGORY SLICERS ============
   const cards = document.querySelectorAll('.news-card, .lead');
-  btns.forEach(btn => {
+  const sections = document.querySelectorAll('section[data-section]');
+
+  function applyFilters(cat) {
+    cards.forEach(card => {
+      const cardCats = card.dataset.cat.split(' ');
+      const catMatch = cat === 'all' || cardCats.includes(cat);
+      card.classList.toggle('hidden', !catMatch);
+    });
+    sections.forEach(section => {
+      const visible = section.querySelectorAll('.news-card:not(.hidden)');
+      section.style.display = visible.length === 0 ? 'none' : '';
+    });
+  }
+
+  const newsSlicers = document.querySelectorAll('#categorySlicers .slicer-btn');
+  newsSlicers.forEach(btn => {
     btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
+      newsSlicers.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const cat = btn.dataset.cat;
-      cards.forEach(c => {
-        c.classList.toggle('hidden', cat !== 'all' && c.dataset.cat !== cat);
-      });
+      applyFilters(btn.dataset.cat);
     });
   });
 </script>
