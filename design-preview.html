@@ -110,6 +110,15 @@
   .ticker .chg.up { color: var(--green); }
   .ticker .chg.down { color: var(--red); }
   .ticker .updated { color: var(--text2); font-size: 0.62rem; }
+  .ticker .refresh-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text2); font-size: 0.68rem; font-weight: 600;
+    padding: 0.22rem 0.6rem; border-radius: 2px; cursor: pointer;
+    letter-spacing: 0.05em; white-space: nowrap; line-height: 1.4;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .ticker .refresh-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .ticker .refresh-btn:active { color: var(--bg); background: var(--text); border-color: var(--text); }
 
   /* ============ SLICERS (persegi, bukan pill) ============ */
   .slicers-row {
