@@ -59,12 +59,20 @@
   .topbar .edition { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text2); }
   .topbar .edition strong { color: var(--accent); font-weight: 700; }
   .theme-toggle {
-    background: transparent; border: 1px solid var(--border);
-    color: var(--text); padding: 0.3rem 0.7rem;
+    background: transparent; border: none;
+    color: var(--text); padding: 0.3rem 0.45rem;
     font-size: 0.7rem; cursor: pointer; font-weight: 600;
     border-radius: 2px; letter-spacing: 0.05em;
+    display: inline-flex; align-items: center; justify-content: center;
+    line-height: 0;
   }
-  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle:hover { color: var(--accent); }
+  .theme-toggle svg { width: 15px; height: 15px; display: block; }
+  /* ikon tema aktif: dark -> bulan, light -> matahari */
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
   /* ============ MASTHEAD ============ */
   header.masthead { text-align: center; padding: 1.25rem 0 1.5rem; }
@@ -205,15 +213,53 @@
     font-size: 0.68rem; color: var(--text2);
     text-align: center; letter-spacing: 0.06em;
   }
+
+  /* ============ BACKGROUND TECH GRAPHIC (ganti tiap hari) ============ */
+  .bg-layer {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    opacity: 0.5;
+    transition: opacity 0.4s;
+  }
+  [data-theme="light"] .bg-layer { opacity: 0.35; }
+
+  /* varian 1 — circuit board */
+  .bg-circuit .bg-layer { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23e0483e' stroke-width='1'%3E%3Cpath d='M0 80h40l20 20h40l20-20h40'/%3E%3Cpath d='M80 0v40l-20 20v60l20 20v20'/%3E%3Cpath d='M0 30h30l20-20h30M160 120h-30l-20-20h-30'/%3E%3Ccircle cx='80' cy='80' r='4' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='120' cy='120' r='3' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='140' cy='60' r='2' fill='%23e0483e' stroke='none'/%3E%3C/g%3E%3C/svg%3E"); }
+
+  /* varian 2 — dot grid */
+  .bg-dots .bg-layer { background-image: radial-gradient(circle, var(--border) 1px, transparent 1px); background-size: 22px 22px; }
+
+  /* varian 3 — hex/network */
+  .bg-hex .bg-layer { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 0L56 16v32L28 64L0 48V16z' fill='none' stroke='%23e0483e' stroke-width='0.7' opacity='0.5'/%3E%3Cpath d='M28 50L56 66v32L28 100L0 84V66z' fill='none' stroke='%23e0483e' stroke-width='0.7' opacity='0.5'/%3E%3C/svg%3E"); }
+
+  /* varian 4 — scanline */
+  .bg-scan .bg-layer { background-image: repeating-linear-gradient(0deg, transparent 0 3px, var(--border) 3px 4px); }
+
+  /* varian 5 — blueprint grid */
+  .bg-blueprint .bg-layer {
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  /* varian 6 — signal waveform */
+  .bg-signal .bg-layer { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='120' viewBox='0 0 400 120'%3E%3Cpath d='M0 60h30l15-25 15 50 15-60 15 55 15-45 15 60 15-70 20 70h40l15-30 15 45 15-50 15 40 15-60 20 60h40l15-20 15 35 15-40 15 30 15-50 20 50h35' fill='none' stroke='%23e0483e' stroke-width='1.2' opacity='0.6'/%3E%3C/svg%3E"); background-size: 400px 120px; }
+
+  /* varian 7 — chip trace */
+  .bg-chip .bg-layer { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e0483e' stroke-width='1'%3E%3Crect x='70' y='70' width='60' height='60'/%3E%3Cpath d='M70 85h-70M70 115h-70M85 70v-70M115 70v-70M130 85h70M130 115h70M85 130v70M115 130v70'/%3E%3Ccircle cx='40' cy='40' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='160' cy='40' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='40' cy='160' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='160' cy='160' r='2' fill='%23e0483e' stroke='none'/%3E%3C/g%3E%3C/svg%3E"); }
 </style>
 </head>
 <body>
+<div class="bg-layer"></div>
 <div class="container">
 
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="edition">Edisi <strong>Rabu</strong> · 5 Agustus 2026</div>
-    <button class="theme-toggle" onclick="toggleTheme()">Tema terang</button>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
   </div>
 
   <!-- MASTHEAD -->
@@ -329,12 +375,22 @@
 </div>
 
 <script>
+  // ============ DAILY BACKGROUND (ganti tiap hari, konsisten sepanjang hari) ============
+  (function () {
+    const variants = ['bg-circuit', 'bg-dots', 'bg-hex', 'bg-scan', 'bg-blueprint', 'bg-signal', 'bg-chip'];
+    const d = new Date();
+    // seed dari tanggal lokal YYYY-MM-DD → hash sederhana → pilih varian
+    const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+    const idx = seed % variants.length;
+    document.body.classList.add(variants[idx]);
+  })();
+
   // ============ THEME TOGGLE ============
   function toggleTheme() {
     const root = document.documentElement;
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
-    document.querySelector('.theme-toggle').textContent = next === 'dark' ? 'Tema terang' : 'Tema gelap';
+    // ikon matahari/bulan tampil otomatis via CSS [data-theme]
   }
 
   // ============ SLICER FILTER ============
