@@ -333,7 +333,7 @@
 
   <!-- NEWS SLICERS -->
   <div class="slicers-row" id="categorySlicers">
-    <button class="slicer-btn active" data-cat="all">Semua <span class="count">(0)</span></button>
+    <button class="slicer-btn active" data-cat="all">Semua <span class="count">(20)</span></button>
     <button class="slicer-btn" data-cat="ai">AI <span class="count">(3)</span></button>
     <button class="slicer-btn" data-cat="earnings">Earnings <span class="count">(3)</span></button>
     <button class="slicer-btn" data-cat="chip">Chip <span class="count">(3)</span></button>
@@ -603,7 +603,8 @@ function filterTicker(region) {
 }
 
 // === CATEGORY SLICERS ===
-const cards = document.querySelectorAll('.news-card');
+// lead story ikut terfilter (dia punya data-cat juga)
+const cards = document.querySelectorAll('.news-card, .lead');
 const sections = document.querySelectorAll('section[data-section]');
 
 function applyFilters(cat) {
