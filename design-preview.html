@@ -12,7 +12,7 @@
     --surface2: #222222;
     --border: #2e2e2e;
     --text: #f0ece4;          /* krem */
-    --text2: #a8a29a;
+    --text2: #b8b2a8;
     --accent: #e0483e;        /* merah editorial */
     --green: #1a7f4b;
     --red: #c62828;
@@ -25,7 +25,7 @@
     --surface2: #efece4;
     --border: #d8d2c6;
     --text: #191714;
-    --text2: #6b655c;
+    --text2: #5c574e;
     --accent: #b3261e;
     --green: #1a7f4b;
     --red: #c62828;
@@ -258,6 +258,91 @@
 
   /* varian 7 — chip trace */
   .bg-chip .bg-layer { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e0483e' stroke-width='1'%3E%3Crect x='70' y='70' width='60' height='60'/%3E%3Cpath d='M70 85h-70M70 115h-70M85 70v-70M115 70v-70M130 85h70M130 115h70M85 130v70M115 130v70'/%3E%3Ccircle cx='40' cy='40' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='160' cy='40' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='40' cy='160' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='160' cy='160' r='2' fill='%23e0483e' stroke='none'/%3E%3C/g%3E%3C/svg%3E"); }
+
+  /* ============ STICKY SLICER BAR ============ */
+  .slicers-row.sticky {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg); padding: 0.5rem 0;
+    margin: 0 -0.5rem 1rem; padding-left: 0.5rem; padding-right: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .slicers-row.sticky::-webkit-scrollbar { height: 3px; }
+  .slicers-row.sticky::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ============ TOP 5 SUMMARY ============ */
+  .top5 {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .top5 h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.82rem; font-weight: 700; margin-bottom: 0.4rem;
+    letter-spacing: 0.03em;
+  }
+  .top5 ol { list-style: none; counter-reset: top5; padding: 0; }
+  .top5 li {
+    counter-increment: top5;
+    font-size: 0.76rem; line-height: 1.5;
+    padding: 0.15rem 0 0.15rem 1.5rem;
+    position: relative;
+  }
+  .top5 li::before {
+    content: counter(top5) ".";
+    position: absolute; left: 0; font-weight: 700; color: var(--accent);
+  }
+  .top5 li a { color: var(--text); }
+  .top5 li a:hover { color: var(--accent); }
+  .top5 li .cat-tag {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text2); margin-left: 0.4rem;
+  }
+
+  /* ============ CARD DATE PROMINENCE ============ */
+  .news-card .date-main {
+    font-weight: 600; color: var(--text); font-size: 0.68rem;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .container { padding: 1rem 0.8rem 3rem; }
+    .masthead h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
+    .lead h2 { font-size: 1.25rem; }
+    .ticker { flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+    .ticker .refresh-btn { align-self: flex-end; margin-top: -1.8rem; }
+    .news-grid { grid-template-columns: 1fr; }
+    .slicers-row { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .section h3 { font-size: 0.9rem; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0.7rem 0.6rem 3rem; }
+    .topbar { flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+    .masthead { padding: 0.8rem 0 1rem; }
+    .masthead h1 { font-size: 1.6rem; }
+    .masthead .window { font-size: 0.7rem; }
+    .lead h2 { font-size: 1.1rem; }
+    .lead p { font-size: 0.85rem; }
+    .lead .meta { flex-direction: column; gap: 0.2rem; }
+    .ticker .item { font-size: 0.7rem; }
+    .news-card { padding: 0.8rem 0.85rem 0.7rem 0.95rem; }
+    .news-card h4 { font-size: 0.9rem; }
+    footer { font-size: 0.62rem; }
+  }
+
+  /* ============ PRINT ============ */
+  @media print {
+    .bg-layer, .theme-toggle, .refresh-btn, .slicers-row, .ticker-section { display: none !important; }
+    body { background: #fff !important; color: #000 !important; }
+    .container { max-width: 100% !important; padding: 0 !important; }
+    .masthead h1, .lead h2, .news-card h4, .section h3 { color: #000 !important; }
+    .news-card { border: 1px solid #ccc !important; break-inside: avoid; }
+    .lead { border-top: 4px solid #000 !important; }
+    .stripe { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    a { color: #000 !important; text-decoration: none !important; }
+    .top5 { break-inside: avoid; }
+  }
 </style>
 </head>
 <body>

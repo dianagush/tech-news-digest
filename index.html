@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tech News Digest — 06 Agu 2026 11:00 WIB</title>
+<meta name="description" content="Ringkasan berita teknologi harian dalam Bahasa Indonesia: AI, chip, gadget, earnings, quantum, dan kebijakan. 20 berita pilihan dari sumber kredibel, diperbarui setiap hari kerja pukul 11:00 WIB.">
+<meta name="theme-color" content="#121212">
+<meta name="author" content="Tech News Digest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23121212'/%3E%3Crect x='4' y='4' width='56' height='56' fill='none' stroke='%23e0483e' stroke-width='3'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' font-weight='bold' fill='%23f0ece4' text-anchor='middle'%3ETD%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tech News Digest">
+<meta property="og:title" content="Tech News Digest — 06 Agu 2026 11:00 WIB">
+<meta property="og:description" content="Ringkasan berita teknologi 24 jam terakhir: AI, chip, gadget, earnings, quantum, kebijakan. Diperbarui tiap hari kerja 11:00 WIB.">
+<meta property="og:url" content="https://dianagush.github.io/tech-news-digest/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tech News Digest — 06 Agu 2026 11:00 WIB">
+<meta name="twitter:description" content="Ringkasan berita teknologi harian: AI, chip, gadget, earnings, quantum, kebijakan.">
 <style>
 
   /* ============ PALET EDITORIAL ============ */
@@ -13,7 +25,7 @@
     --surface2: #222222;
     --border: #2e2e2e;
     --text: #f0ece4;          /* krem */
-    --text2: #a8a29a;
+    --text2: #b8b2a8;
     --accent: #e0483e;        /* merah editorial */
     --green: #1a7f4b;
     --red: #c62828;
@@ -26,7 +38,7 @@
     --surface2: #efece4;
     --border: #d8d2c6;
     --text: #191714;
-    --text2: #6b655c;
+    --text2: #5c574e;
     --accent: #b3261e;
     --green: #1a7f4b;
     --red: #c62828;
@@ -260,6 +272,91 @@
   /* varian 7 — chip trace */
   .bg-chip .bg-layer { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e0483e' stroke-width='1'%3E%3Crect x='70' y='70' width='60' height='60'/%3E%3Cpath d='M70 85h-70M70 115h-70M85 70v-70M115 70v-70M130 85h70M130 115h70M85 130v70M115 130v70'/%3E%3Ccircle cx='40' cy='40' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='160' cy='40' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='40' cy='160' r='2' fill='%23e0483e' stroke='none'/%3E%3Ccircle cx='160' cy='160' r='2' fill='%23e0483e' stroke='none'/%3E%3C/g%3E%3C/svg%3E"); }
 
+  /* ============ STICKY SLICER BAR ============ */
+  .slicers-row.sticky {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg); padding: 0.5rem 0;
+    margin: 0 -0.5rem 1rem; padding-left: 0.5rem; padding-right: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .slicers-row.sticky::-webkit-scrollbar { height: 3px; }
+  .slicers-row.sticky::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ============ TOP 5 SUMMARY ============ */
+  .top5 {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .top5 h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.82rem; font-weight: 700; margin-bottom: 0.4rem;
+    letter-spacing: 0.03em;
+  }
+  .top5 ol { list-style: none; counter-reset: top5; padding: 0; }
+  .top5 li {
+    counter-increment: top5;
+    font-size: 0.76rem; line-height: 1.5;
+    padding: 0.15rem 0 0.15rem 1.5rem;
+    position: relative;
+  }
+  .top5 li::before {
+    content: counter(top5) ".";
+    position: absolute; left: 0; font-weight: 700; color: var(--accent);
+  }
+  .top5 li a { color: var(--text); }
+  .top5 li a:hover { color: var(--accent); }
+  .top5 li .cat-tag {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text2); margin-left: 0.4rem;
+  }
+
+  /* ============ CARD DATE PROMINENCE ============ */
+  .news-card .date-main {
+    font-weight: 600; color: var(--text); font-size: 0.68rem;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .container { padding: 1rem 0.8rem 3rem; }
+    .masthead h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
+    .lead h2 { font-size: 1.25rem; }
+    .ticker { flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+    .ticker .refresh-btn { align-self: flex-end; margin-top: -1.8rem; }
+    .news-grid { grid-template-columns: 1fr; }
+    .slicers-row { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .section h3 { font-size: 0.9rem; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0.7rem 0.6rem 3rem; }
+    .topbar { flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+    .masthead { padding: 0.8rem 0 1rem; }
+    .masthead h1 { font-size: 1.6rem; }
+    .masthead .window { font-size: 0.7rem; }
+    .lead h2 { font-size: 1.1rem; }
+    .lead p { font-size: 0.85rem; }
+    .lead .meta { flex-direction: column; gap: 0.2rem; }
+    .ticker .item { font-size: 0.7rem; }
+    .news-card { padding: 0.8rem 0.85rem 0.7rem 0.95rem; }
+    .news-card h4 { font-size: 0.9rem; }
+    footer { font-size: 0.62rem; }
+  }
+
+  /* ============ PRINT ============ */
+  @media print {
+    .bg-layer, .theme-toggle, .refresh-btn, .slicers-row, .ticker-section { display: none !important; }
+    body { background: #fff !important; color: #000 !important; }
+    .container { max-width: 100% !important; padding: 0 !important; }
+    .masthead h1, .lead h2, .news-card h4, .section h3 { color: #000 !important; }
+    .news-card { border: 1px solid #ccc !important; break-inside: avoid; }
+    .lead { border-top: 4px solid #000 !important; }
+    .stripe { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    a { color: #000 !important; text-decoration: none !important; }
+    .top5 { break-inside: avoid; }
+  }
+
 </style>
 </head>
 <body>
@@ -269,7 +366,7 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="edition">Edisi · Digest Harian</div>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema gelap/terang" aria-label="Ganti tema gelap atau terang">
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
@@ -284,10 +381,22 @@
   </header>
 
   <!-- LIVE STATS -->
-  <div class="ticker">
+  <div class="ticker" role="region" aria-label="Data pasar terkini">
     <div class="item"><span class="label">IHSG</span><span class="val" id="ihsg-value">…</span><span class="chg" id="ihsg-change"></span></div>
     <div class="item"><span class="label">USD/IDR</span><span class="val" id="usdidr-value">…</span><span class="chg" id="usdidr-time"></span></div>
-    <button class="refresh-btn" onclick="refreshLiveData()">⟳ Refresh</button>
+    <button class="refresh-btn" onclick="refreshLiveData()" aria-label="Perbarui data pasar">⟳ Refresh</button>
+  </div>
+
+  <!-- TOP 5 -->
+  <div class="top5">
+    <h3>Sorotan Hari Ini</h3>
+    <ol>
+      <li><a href="#card-3">SpaceX Anjlok 13% — Belanja AI Agresif Bikin Wall Street Cemas</a><span class="cat-tag">Earnings</span></li>
+      <li><a href="#card-6">Saham Chip Asia Bangkit — SoftBank +10%, Advantest +7%, Kioxia +6,3%</a><span class="cat-tag">Chip</span></li>
+      <li><a href="#card-9">Pre-order Galaxy Z Fold 8 Pecahkan Rekor 7 Tahun — 1,44 Juta Unit</a><span class="cat-tag">Gadget</span></li>
+      <li><a href="#card-16">Qarakal Quantum Rilis Arsitektur 'Pangaea' — Potong Overhead Qubit 10x</a><span class="cat-tag">Quantum</span></li>
+      <li><a href="#card-17">New Jersey Gugat Amazon — Tuduh Penyalahgunaan Kuasa atas Kontraktor Pengiriman</a><span class="cat-tag">Policy</span></li>
+    </ol>
   </div>
 
   <!-- LEAD STORY -->
@@ -297,16 +406,16 @@
     <p>Alphabet mengumumkan perombakan besar divisi AI: Demis Hassabis mundur dari CEO DeepMind menjadi Chairman & Chief Scientist Alphabet, sementara Jeff Dean bersama tiga veteran (Ghemawat, Vinyals, Le) keluar mendirikan startup riset Discovery Loop. Saham Google drop hampir 4% usai kabar ini.</p>
     <div class="meta">
       <span class="src">05 Agu · Reuters</span>
-      <span class="sent down">Sentimen: Turun</span>
-      <a class="read-more" href="https://www.reuters.com/business/google-shakes-up-ai-leadership-deepmind-chief-shifts-role-2026-08-05/" target="_blank">Baca selengkapnya</a>
+      <span class="sent down">Kabar negatif</span>
+      <a class="read-more" href="https://www.reuters.com/business/google-shakes-up-ai-leadership-deepmind-chief-shifts-role-2026-08-05/" target="_blank" rel="noopener">Baca selengkapnya</a>
     </div>
   </div>
 
 
   <!-- MARKET TICKERS -->
   <div class="ticker-section">
-    <div class="slicers-row">
-      <span class="ticker-label">Pasar:</span>
+    <div class="slicers-row" role="group" aria-label="Filter pasar saham">
+      <span class="ticker-label">Pergerakan saham 06 Aug 2026:</span>
       <button class="slicer-btn active" data-ticker="all" onclick="filterTicker('all')">Semua</button>
       <button class="slicer-btn" data-ticker="us" onclick="filterTicker('us')">US</button>
       <button class="slicer-btn" data-ticker="id" onclick="filterTicker('id')">Indo</button>
@@ -334,7 +443,7 @@
   </div>
 
   <!-- NEWS SLICERS -->
-  <div class="slicers-row" id="categorySlicers">
+  <div class="slicers-row sticky" id="categorySlicers" role="group" aria-label="Filter kategori berita">
     <button class="slicer-btn active" data-cat="all">Semua <span class="count">(20)</span></button>
     <button class="slicer-btn" data-cat="ai">AI <span class="count">(3)</span></button>
     <button class="slicer-btn" data-cat="earnings">Earnings <span class="count">(3)</span></button>
@@ -349,168 +458,168 @@
     <section data-section="ai">
     <div class="section"><div class="rule-thick"></div><h3>AI & Large Language Models</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card" data-cat="ai">
+    <div class="news-card" id="card-1" data-cat="ai">
       <div class="stripe stripe-up"></div>
       <span class="tag">Meta</span>
       <h4>Meta Luncurkan Muse Code — Agen Coding AI Pertama Lawan Anthropic & OpenAI</h4>
       <p>Meta merilis Muse Code, agen coding AI pertama berbasis model Muse Spark 1.2, untuk membantu developer menulis dan men-debug software. Langkah ini menempatkan Meta sebagai pesaing langsung Claude Code dan Codex di pasar alat pengembangan AI.</p>
-      <div class="foot"><span>05 Agu · Reuters</span><a class="read-more" href="https://www.reuters.com/technology/meta-launches-new-ai-coding-tool-powered-by-muse-spark-12-2026-08-05/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · Reuters</span><a class="read-more" href="https://www.reuters.com/technology/meta-launches-new-ai-coding-tool-powered-by-muse-spark-12-2026-08-05/" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="ai">
+    <div class="news-card" id="card-2" data-cat="ai">
       <div class="stripe stripe-up"></div>
       <span class="tag">Anthropic</span>
       <h4>Anthropic Teken Kesepakatan US$ 10 Miliar dengan Startup AI Cloud Volta</h4>
       <p>Anthropic menandatangani kontrak senilai US$ 10 miliar dengan Volta, startup AI cloud, untuk kapasitas komputasi jangka panjang. Kesepakatan ini salah satu yang terbesar di industri AI cloud dan menandai perlombaan kapasitas GPU antar lab AI frontier.</p>
-      <div class="foot"><span>04 Agu · TechCrunch</span><a class="read-more" href="https://techcrunch.com/2026/08/04/anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">04 Agu</span> · TechCrunch</span><a class="read-more" href="https://techcrunch.com/2026/08/04/anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta/" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="earnings">
     <div class="section"><div class="rule-thick"></div><h3>Earnings & Big Tech</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card featured" data-cat="earnings">
+    <div class="news-card featured" id="card-3" data-cat="earnings">
       <div class="stripe stripe-down"></div>
       <span class="tag">SpaceX</span>
       <h4>SpaceX Anjlok 13% — Belanja AI Agresif Bikin Wall Street Cemas</h4>
       <p>Saham SpaceX (SPCX) jatuh 13% setelah laporan Q2 perdana: pendapatan top ekspektasi, tapi belanja AI masif — termasuk pembelian Tesla Megapack US$ 329 juta tahun ini untuk data center — membuat investor khawatir soal payoff jangka panjang menjelang share unlock.</p>
-      <div class="foot"><span>05 Agu · CNBC</span><a class="read-more" href="https://www.cnbc.com/2026/08/05/spacex-spcx-stock-today-earnings.html" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · CNBC</span><a class="read-more" href="https://www.cnbc.com/2026/08/05/spacex-spcx-stock-today-earnings.html" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="earnings">
+    <div class="news-card" id="card-4" data-cat="earnings">
       <div class="stripe stripe-up"></div>
       <span class="tag">Palantir</span>
       <h4>Palantir Meledak 29% — 'Otherworldly' Quarter, Revenue Naik 93%</h4>
       <p>Palantir mencetak Q2 2026: revenue US$ 1,94 miliar, naik 93% YoY dengan komersial AS melonjak hampir 150%. Panduan FY2026 dinaikkan ke pertumbuhan 82%, dan CEO menyebut kuartal ini 'otherworldly'. Saham PLTR melesat 29%.</p>
-      <div class="foot"><span>03-04 Agu · The Guardian</span><a class="read-more" href="https://www.theguardian.com/us-news/2026/aug/03/palantir-second-quarter-earnings" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">03-04 Agu</span> · The Guardian</span><a class="read-more" href="https://www.theguardian.com/us-news/2026/aug/03/palantir-second-quarter-earnings" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="earnings">
+    <div class="news-card" id="card-5" data-cat="earnings">
       <div class="stripe stripe-up"></div>
       <span class="tag">SpaceX</span>
       <h4>SpaceX Borong Tesla Megapack US$ 329 Juta Tahun Ini untuk Data Center AI</h4>
       <p>SpaceX membeli Tesla Megapack senilai US$ 329 juta sepanjang 2026 untuk memasok daya data center AI-nya, melanjutkan tren belanja infrastruktur masif pasca merger xAI. Total pembelian Megapack gabungan SpaceX-xAI mendekati US$ 1 miliar.</p>
-      <div class="foot"><span>04 Agu · TechCrunch</span><a class="read-more" href="https://techcrunch.com/2026/08/04/spacex-has-bought-329m-worth-of-tesla-megapacks-so-far-this-year/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">04 Agu</span> · TechCrunch</span><a class="read-more" href="https://techcrunch.com/2026/08/04/spacex-has-bought-329m-worth-of-tesla-megapacks-so-far-this-year/" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="chip">
     <div class="section"><div class="rule-thick"></div><h3>Semiconductor & Chip Industry</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card featured" data-cat="chip">
+    <div class="news-card featured" id="card-6" data-cat="chip">
       <div class="stripe stripe-up"></div>
       <span class="tag">Rally Asia</span>
       <h4>Saham Chip Asia Bangkit — SoftBank +10%, Advantest +7%, Kioxia +6,3%</h4>
       <p>Saham semikonduktor Asia menguat tajam pada 5 Agustus: SoftBank melonjak 10%, Tokyo Electron +3,6%, Advantest +7%, dan Kioxia +6,3%. Rally ini menandai pemulihan sektor chip setelah sempat kehilangan US$ 1 triliun kapitalisasi pasar sebulan sebelumnya.</p>
-      <div class="foot"><span>05 Agu · CNBC</span><a class="read-more" href="https://www.cnbc.com/amp/2026/08/05/softbank-samsung-sk-hynix-samsung-tech-rally.html" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · CNBC</span><a class="read-more" href="https://www.cnbc.com/amp/2026/08/05/softbank-samsung-sk-hynix-samsung-tech-rally.html" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="chip">
+    <div class="news-card" id="card-7" data-cat="chip">
       <div class="stripe stripe-up"></div>
       <span class="tag">TSMC</span>
       <h4>Druckenmiller Pertahankan TSMC — Yakin Permintaan Chip Nvidia & AMD Berlanjut</h4>
       <p>Stanley Druckenmiller mempertahankan posisinya di Taiwan Semiconductor (TSMC) setelah Q2 yang kuat, bertaruh permintaan chip dari Nvidia dan AMD terus tumbuh. TSMC disebut kembali menembus valuasi US$ 2 triliun.</p>
-      <div class="foot"><span>04 Agu · Motley Fool</span><a class="read-more" href="https://www.fool.com/investing/2026/08/04/druckenmiller-hold-tsmc-chip-nvidia-amd/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">04 Agu</span> · Motley Fool</span><a class="read-more" href="https://www.fool.com/investing/2026/08/04/druckenmiller-hold-tsmc-chip-nvidia-amd/" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="chip">
+    <div class="news-card" id="card-8" data-cat="chip">
       <div class="stripe stripe-up"></div>
       <span class="tag">Memory</span>
       <h4>CXMT Incar IPO Terbesar China — Krisis Memori Empat Dekade Sekali</h4>
       <p>CXMT, produsen DRAM terbesar China, menyiapkan salah satu IPO semikonduktor terbesar di tengah kelangkaan memori yang disebut 'sekali dalam empat dekade'. Fase kedua fab Shanghai ditargetkan rampung paruh kedua 2026.</p>
-      <div class="foot"><span>05 Agu · EE Times</span><a class="read-more" href="https://www.eetimes.com/cxmt-ipo-where-chinas-largest-dram-maker-stands/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · EE Times</span><a class="read-more" href="https://www.eetimes.com/cxmt-ipo-where-chinas-largest-dram-maker-stands/" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="gadget">
     <div class="section"><div class="rule-thick"></div><h3>Gadget & Consumer Tech</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card featured" data-cat="gadget">
+    <div class="news-card featured" id="card-9" data-cat="gadget">
       <div class="stripe stripe-up"></div>
       <span class="tag">Samsung</span>
       <h4>Pre-order Galaxy Z Fold 8 Pecahkan Rekor 7 Tahun — 1,44 Juta Unit</h4>
       <p>Galaxy Z Fold 8 dan Flip 8 mulai dijual 5 Agustus usai Galaxy Unpacked Juli. Pre-order Fold 8 menembus 1,44 juta unit — rekor tertinggi Samsung dalam 7 tahun — didorong Z Fold 8 Ultra dan teknologi layar generasi baru.</p>
-      <div class="foot"><span>05 Agu · Kompas Tekno</span><a class="read-more" href="https://tekno.kompas.com/read/2026/08/05/14010027/galaxy-z-fold-8-pecahkan-rekor-7-tahun-samsung-pre-order-tembus-1-44-juta-unit" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · Kompas Tekno</span><a class="read-more" href="https://tekno.kompas.com/read/2026/08/05/14010027/galaxy-z-fold-8-pecahkan-rekor-7-tahun-samsung-pre-order-tembus-1-44-juta-unit" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="gadget">
+    <div class="news-card" id="card-10" data-cat="gadget">
       <div class="stripe stripe-neutral"></div>
       <span class="tag">Google Pixel</span>
       <h4>Made by Google 12 Agustus: Pixel 11 Series, Fold, Watch 5 & Earbuds</h4>
       <p>Event Made by Google tinggal seminggu lagi (12 Agustus): Pixel 11, Pixel 11 Pro, Pro XL dan Pro Fold dengan Tensor G6 diprediksi debut, plus Pixel Watch 5 dan kemungkinan earbuds baru. Teaser resmi Pixel Glow sudah dirilis Google.</p>
-      <div class="foot"><span>05 Agu · Digital Trends</span><a class="read-more" href="https://www.digitaltrends.com/phones/made-by-google-august-2026-everything-we-expect-from-the-pixel-11-launch-event/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · Digital Trends</span><a class="read-more" href="https://www.digitaltrends.com/phones/made-by-google-august-2026-everything-we-expect-from-the-pixel-11-launch-event/" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="gadget">
+    <div class="news-card" id="card-11" data-cat="gadget">
       <div class="stripe stripe-neutral"></div>
       <span class="tag">Huawei</span>
       <h4>Huawei Rilis MateBook Fold 2026 — Laptop Lipat 18 Inci dengan Kirin X90 Plus</h4>
       <p>Huawei meluncurkan MateBook Fold PC Ultimate Design 2026 pada 5 Agustus: layar OLED lipat 18 inci rasio 92% screen-to-body, chip Kirin X90 Plus dengan peningkatan performa 25%, hingga 32GB RAM dan 2TB storage — di tengah sanksi perdagangan yang masih berlanjut.</p>
-      <div class="foot"><span>05 Agu · Technode</span><a class="read-more" href="https://technode.com/2026/08/05/huawei-sets-aug-5-launch-for-18-inch-foldable-matebook-fold/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · Technode</span><a class="read-more" href="https://technode.com/2026/08/05/huawei-sets-aug-5-launch-for-18-inch-foldable-matebook-fold/" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="gadget">
+    <div class="news-card" id="card-12" data-cat="gadget">
       <div class="stripe stripe-neutral"></div>
       <span class="tag">LG</span>
       <h4>LG Lepas Nama 'Optimus' untuk Smartphone G2 — Era Baru Ponsel LG</h4>
       <p>LG dilaporkan meninggalkan nama 'Optimus' untuk lini smartphone G2, menandai era baru strategi ponsel LG setelah kebangkitan kembali di pasar mobile. Perubahan branding ini menyertai lini flagship terbarunya.</p>
-      <div class="foot"><span>05 Agu · PCMag</span><a class="read-more" href="https://www.pcmag.com/news/lg-drops-optimus-name-for-g2-smartphone" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · PCMag</span><a class="read-more" href="https://www.pcmag.com/news/lg-drops-optimus-name-for-g2-smartphone" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="gadget">
+    <div class="news-card" id="card-13" data-cat="gadget">
       <div class="stripe stripe-up"></div>
       <span class="tag">EV Battery</span>
       <h4>SK On & Factorial Energy Jajaki Baterai Solid-State — MoU Ditandatangani</h4>
       <p>Produsen baterai asal Korea SK On menandatangani MoU dengan Factorial Energy untuk mengeksplorasi baterai solid-state. Kemitraan ini menyusul integrasi baterai solid-state Factorial ke kendaraan pengembangan Stellantis, mempercepat adopsi teknologi EV generasi baru.</p>
-      <div class="foot"><span>04-05 Agu · Factorial Energy, SK On</span><a class="read-more" href="https://ir.factorialenergy.com/news-releases/news-release-details/factorial-and-sk-sign-mou-explore-solid-state-battery" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">04-05 Agu</span> · Factorial Energy, SK On</span><a class="read-more" href="https://ir.factorialenergy.com/news-releases/news-release-details/factorial-and-sk-sign-mou-explore-solid-state-battery" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="gadget">
+    <div class="news-card" id="card-14" data-cat="gadget">
       <div class="stripe stripe-up"></div>
       <span class="tag">Honor</span>
       <h4>Honor Band 11 Series Resmi — Baterai Tahan hingga 26 Hari</h4>
       <p>Honor meluncurkan smartband Band 11 dan Band 11 Pro: layar OLED 1,61 inci 60Hz, baterai tahan hingga 26 hari, dan varian Pro dengan GPS serta NFC. Smartband ini jadi pesaing langsung di segmen wearable budget global.</p>
-      <div class="foot"><span>04 Agu · Kompas Tekno</span><a class="read-more" href="https://tekno.kompas.com/read/2026/08/04/10030047/smartband-honor-band-11-dan-band-11-pro-resmi-baterai-tahan-hingga-26-hari" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">04 Agu</span> · Kompas Tekno</span><a class="read-more" href="https://tekno.kompas.com/read/2026/08/04/10030047/smartband-honor-band-11-dan-band-11-pro-resmi-baterai-tahan-hingga-26-hari" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="gadget">
+    <div class="news-card" id="card-15" data-cat="gadget">
       <div class="stripe stripe-up"></div>
       <span class="tag">Android</span>
       <h4>Sunbird Bawa iMessage ke Android — Kembali ke Google Play Setelah 3 Tahun</h4>
       <p>Sunbird Messaging resmi kembali ke Google Play Store: aplikasi yang menggabungkan iMessage, RCS, dan SMS dalam satu app untuk Android, tanpa perlu perangkat Apple. Tersedia dengan harga US$ 2,99 per bulan.</p>
-      <div class="foot"><span>05 Agu · The Verge, MacRumors</span><a class="read-more" href="https://www.theverge.com/tech/975563/imessage-android-sunbird" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · The Verge, MacRumors</span><a class="read-more" href="https://www.theverge.com/tech/975563/imessage-android-sunbird" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="quantum">
     <div class="section"><div class="rule-thick"></div><h3>Quantum Computing</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card featured" data-cat="quantum">
+    <div class="news-card featured" id="card-16" data-cat="quantum">
       <div class="stripe stripe-up"></div>
       <span class="tag">Qarakal</span>
       <h4>Qarakal Quantum Rilis Arsitektur 'Pangaea' — Potong Overhead Qubit 10x</h4>
       <p>Qarakal Quantum meluncurkan Pangaea, arsitektur komputasi kuantum modular 3D superconducting yang mengurangi kebutuhan qubit fisik untuk sistem fault-tolerant hingga 10 kali lipat dibanding planar surface code, lewat quantum bus ber-IP yang memediasi operasi antar patch kode topologi.</p>
-      <div class="foot"><span>05 Agu · Quantum Computing Report</span><a class="read-more" href="https://quantumcomputingreport.com/qarakal-quantum-unveils-pangaea-modular-architecture-to-cut-qubit-overhead-by-10x/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · Quantum Computing Report</span><a class="read-more" href="https://quantumcomputingreport.com/qarakal-quantum-unveils-pangaea-modular-architecture-to-cut-qubit-overhead-by-10x/" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="policy">
     <div class="section"><div class="rule-thick"></div><h3>Policy, Regulasi & Security</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card featured" data-cat="policy">
+    <div class="news-card featured" id="card-17" data-cat="policy">
       <div class="stripe stripe-neutral"></div>
       <span class="tag">Antitrust</span>
       <h4>New Jersey Gugat Amazon — Tuduh Penyalahgunaan Kuasa atas Kontraktor Pengiriman</h4>
       <p>Jaksa Agung New Jersey mengajukan gugatan antitrust terhadap Amazon, menuduh raksasa e-commerce itu secara melawan hukum mengendalikan kontraktor pengiriman dan menekan biaya. Kasus ini menambah daftar panjang tekanan regulasi terhadap Big Tech di AS.</p>
-      <div class="foot"><span>04 Agu · Engadget</span><a class="read-more" href="https://www.engadget.com/2230253/nj-antitrust-suit-accuses-amazon-of-unlawfully-wielding-power-over-delivery-contractors/" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">04 Agu</span> · Engadget</span><a class="read-more" href="https://www.engadget.com/2230253/nj-antitrust-suit-accuses-amazon-of-unlawfully-wielding-power-over-delivery-contractors/" target="_blank" rel="noopener">Baca</a></div>
     </div>
-    <div class="news-card" data-cat="policy">
+    <div class="news-card" id="card-18" data-cat="policy">
       <div class="stripe stripe-neutral"></div>
       <span class="tag">White House</span>
       <h4>White House Bahas Framework Review Model AI Baru dengan Perusahaan Teknologi</h4>
       <p>NYT melaporkan White House mengundang perusahaan teknologi AS membahas framework yang memungkinkan pemerintah meninjau model AI baru untuk masalah keamanan siber. Kebijakan yang berubah-ubah membuat Silicon Valley kebingungan di tengah tarik-ulur regulasi AI.</p>
-      <div class="foot"><span>04 Agu · New York Times</span><a class="read-more" href="https://www.nytimes.com/2026/08/04/technology/ai-washington-regulation-whiplash.html" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">04 Agu</span> · New York Times</span><a class="read-more" href="https://www.nytimes.com/2026/08/04/technology/ai-washington-regulation-whiplash.html" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="other">
     <div class="section"><div class="rule-thick"></div><h3>Lain-lain — Pasar & Teknologi Terkait</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card featured" data-cat="other">
+    <div class="news-card featured" id="card-19" data-cat="other">
       <div class="stripe stripe-up"></div>
       <span class="tag">IHSG</span>
       <h4>Ekonomi RI Tumbuh 5,29% — IHSG Menguat 0,69% ke 6.363</h4>
       <p>IHSG naik 0,69% ke 6.363 pada 5 Agustus 2026, didorong sentimen positif domestik dan global. Pertumbuhan ekonomi Indonesia kuartal II-2026 tercatat 5,29%, di atas ekspektasi pasar, menopang momentum penguatan indeks di awal Agustus.</p>
-      <div class="foot"><span>05 Agu · CNBC Indonesia</span><a class="read-more" href="https://www.cnbcindonesia.com/market/20260805120636-17-756729/ada-kabar-baik-dari-domestik-global-ihsg-naik-069-ke-6363" target="_blank">Baca</a></div>
+      <div class="foot"><span><span class="date-main">05 Agu</span> · CNBC Indonesia</span><a class="read-more" href="https://www.cnbcindonesia.com/market/20260805120636-17-756729/ada-kabar-baik-dari-domestik-global-ihsg-naik-069-ke-6363" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>

@@ -86,6 +86,10 @@ m_live_usd = re.search(r"const LIVE_USDIDR = \{([^}]+)\};", old_html)
 live_ihsg = m_live_ihsg.group(1) if m_live_ihsg else "price: 0, change: 0, pct: 0"
 live_usd = m_live_usd.group(1) if m_live_usd else "rate: 0, updated: ''"
 
+# tanggal data pasar untuk label ticker (dari LIVE_USDIDR.updated, mis. '06 Aug 2026 11:28')
+m_upd = re.search(r"updated:\s*'([^']*)'", live_usd)
+market_date = (m_upd.group(1).rsplit(" ", 1)[0] if m_upd and m_upd.group(1) else "hari ini")
+
 # ---------- 4. build sections HTML (editorial) ----------
 # LEAD STORY dulu (dipakai loop di bawah)
 all_cards = [c for s in sections for c in s["cards"]]
@@ -101,22 +105,37 @@ section_titles = {
     "other": "Lain-lain — Pasar & Teknologi Terkait",
 }
 
-def card_html(c):
+def card_html(c, idx=None):
     feat = " featured" if c["featured"] else ""
-    return f'''    <div class="news-card{feat}" data-cat="{c['cat']}">
+    anchor = f' id="card-{idx}"' if idx is not None else ""
+    # pisahkan tanggal (sebelum ·) dan sumber (sesudah ·) agar tanggal bisa ditonjolkan
+    src = c["source"]
+    if "·" in src:
+        tgl, outlet = src.split("·", 1)
+        foot_left = f'<span class="date-main">{tgl.strip()}</span> · {outlet.strip()}'
+    else:
+        foot_left = src
+    return f'''    <div class="news-card{feat}"{anchor} data-cat="{c['cat']}">
       <div class="stripe {c['stripe']}"></div>
       <span class="tag">{c['tag']}</span>
       <h4>{c['title']}</h4>
       <p>{c['desc']}</p>
-      <div class="foot"><span>{c['source']}</span><a class="read-more" href="{c['href']}" target="_blank">Baca</a></div>
+      <div class="foot"><span>{foot_left}</span><a class="read-more" href="{c['href']}" target="_blank" rel="noopener">Baca</a></div>
     </div>'''
 
 sections_html = []
+card_index = {}  # id(card) -> nomor anchor, dipakai Top-5
+_ctr = [0]
 for s in sections:
     title = section_titles.get(s["name"], s["name"])
     # kartu lead tidak diulang di grid (sudah tampil sebagai headline)
     grid_cards = [c for c in s["cards"] if c is not lead]
-    grid = "\n".join(card_html(c) for c in grid_cards)
+    parts = []
+    for c in grid_cards:
+        _ctr[0] += 1
+        card_index[id(c)] = _ctr[0]
+        parts.append(card_html(c, _ctr[0]))
+    grid = "\n".join(parts)
     sections_html.append(f'''    <section data-section="{s['name']}">
     <div class="section"><div class="rule-thick"></div><h3>{title}</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
@@ -131,7 +150,7 @@ if lead:
     sent = "neutral"
     if "up" in lead["stripe"]: sent = "up"
     elif "down" in lead["stripe"]: sent = "down"
-    sent_label = {"up": "Sentimen: Naik", "down": "Sentimen: Turun", "neutral": "Sentimen: Netral"}[sent]
+    sent_label = {"up": "Kabar positif", "down": "Kabar negatif", "neutral": "Netral"}[sent]
     lead_html = f'''  <!-- LEAD STORY -->
   <div class="lead" data-cat="{lead['cat']}">
     <div class="tag-row"><span class="tag">{lead['tag']}</span></div>
@@ -140,8 +159,34 @@ if lead:
     <div class="meta">
       <span class="src">{lead['source']}</span>
       <span class="sent {sent}">{sent_label}</span>
-      <a class="read-more" href="{lead['href']}" target="_blank">Baca selengkapnya</a>
+      <a class="read-more" href="{lead['href']}" target="_blank" rel="noopener">Baca selengkapnya</a>
     </div>
+  </div>
+'''
+
+# ---------- 4c. TOP 5 (ringkasan cepat, klik -> scroll ke kartu) ----------
+cat_label = {"ai": "AI", "earnings": "Earnings", "chip": "Chip", "gadget": "Gadget",
+             "quantum": "Quantum", "policy": "Policy", "other": "Lain-lain"}
+top5_items = [c for c in all_cards if c["featured"] and c is not lead][:5]
+if len(top5_items) < 5:
+    for c in all_cards:
+        if c is not lead and c not in top5_items:
+            top5_items.append(c)
+        if len(top5_items) == 5:
+            break
+top5_html = ""
+if top5_items:
+    lis = "\n".join(
+        f'      <li><a href="#card-{card_index.get(id(c), 1)}">{c["title"]}</a>'
+        f'<span class="cat-tag">{cat_label.get(c["cat"], c["cat"])}</span></li>'
+        for c in top5_items
+    )
+    top5_html = f'''  <!-- TOP 5 -->
+  <div class="top5">
+    <h3>Sorotan Hari Ini</h3>
+    <ol>
+{lis}
+    </ol>
   </div>
 '''
 
@@ -290,6 +335,18 @@ html = f'''<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tech News Digest — {window_text.group(2) if window_text else ''}</title>
+<meta name="description" content="Ringkasan berita teknologi harian dalam Bahasa Indonesia: AI, chip, gadget, earnings, quantum, dan kebijakan. {total_cards} berita pilihan dari sumber kredibel, diperbarui setiap hari kerja pukul 11:00 WIB.">
+<meta name="theme-color" content="#121212">
+<meta name="author" content="Tech News Digest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23121212'/%3E%3Crect x='4' y='4' width='56' height='56' fill='none' stroke='%23e0483e' stroke-width='3'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' font-weight='bold' fill='%23f0ece4' text-anchor='middle'%3ETD%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tech News Digest">
+<meta property="og:title" content="Tech News Digest — {window_text.group(2) if window_text else ''}">
+<meta property="og:description" content="Ringkasan berita teknologi 24 jam terakhir: AI, chip, gadget, earnings, quantum, kebijakan. Diperbarui tiap hari kerja 11:00 WIB.">
+<meta property="og:url" content="https://dianagush.github.io/tech-news-digest/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tech News Digest — {window_text.group(2) if window_text else ''}">
+<meta name="twitter:description" content="Ringkasan berita teknologi harian: AI, chip, gadget, earnings, quantum, kebijakan.">
 <style>
 {css}
 </style>
@@ -301,7 +358,7 @@ html = f'''<!DOCTYPE html>
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="edition">Edisi · Digest Harian</div>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema gelap/terang" aria-label="Ganti tema gelap atau terang">
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
@@ -316,18 +373,19 @@ html = f'''<!DOCTYPE html>
   </header>
 
   <!-- LIVE STATS -->
-  <div class="ticker">
+  <div class="ticker" role="region" aria-label="Data pasar terkini">
     <div class="item"><span class="label">IHSG</span><span class="val" id="ihsg-value">…</span><span class="chg" id="ihsg-change"></span></div>
     <div class="item"><span class="label">USD/IDR</span><span class="val" id="usdidr-value">…</span><span class="chg" id="usdidr-time"></span></div>
-    <button class="refresh-btn" onclick="refreshLiveData()">⟳ Refresh</button>
+    <button class="refresh-btn" onclick="refreshLiveData()" aria-label="Perbarui data pasar">⟳ Refresh</button>
   </div>
 
+{top5_html}
 {lead_html}
 
   <!-- MARKET TICKERS -->
   <div class="ticker-section">
-    <div class="slicers-row">
-      <span class="ticker-label">Pasar:</span>
+    <div class="slicers-row" role="group" aria-label="Filter pasar saham">
+      <span class="ticker-label">Pergerakan saham {market_date}:</span>
       <button class="slicer-btn active" data-ticker="all" onclick="filterTicker('all')">Semua</button>
       <button class="slicer-btn" data-ticker="us" onclick="filterTicker('us')">US</button>
       <button class="slicer-btn" data-ticker="id" onclick="filterTicker('id')">Indo</button>
@@ -341,7 +399,7 @@ html = f'''<!DOCTYPE html>
   </div>
 
   <!-- NEWS SLICERS -->
-  <div class="slicers-row" id="categorySlicers">
+  <div class="slicers-row sticky" id="categorySlicers" role="group" aria-label="Filter kategori berita">
 {slicers}
   </div>
 
