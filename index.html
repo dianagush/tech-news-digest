@@ -123,8 +123,8 @@
   .ticker .chg.up { color: var(--green); }
   .ticker .chg.down { color: var(--red); }
   .ticker .updated { color: var(--text2); font-size: 0.62rem; }
-  .ticker.hidden { display: none; }
-  .lead.hidden { display: none; }
+  .ticker.hidden { display: none !important; }
+  .lead.hidden { display: none !important; }
   .ticker .refresh-btn {
     background: transparent; border: 1px solid var(--border);
     color: var(--text2); font-size: 0.68rem; font-weight: 600;
@@ -207,7 +207,7 @@
     transition: border-color 0.15s;
   }
   .news-card:hover { border-color: var(--accent); }
-  .news-card.hidden { display: none; }
+  .news-card.hidden { display: none !important; }
   .news-card .stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
   .stripe-up { background: var(--green); }
   .stripe-down { background: var(--red); }
@@ -661,8 +661,8 @@
 
 <script>
 // === LIVE DATA: IHSG + USD/IDR (di-embed cron server-side) ===
-const LIVE_IHSG = {price: 6409.654, change: 65.94, pct: 1.04};
-const LIVE_USDIDR = {rate: 17862.19, updated: '10 Aug 2026 08:25'};
+const LIVE_IHSG = {price: 6351.336, change: 0.2, pct: 0.0};
+const LIVE_USDIDR = {rate: 17925.35, updated: '06 Aug 2026 11:28'};
 
 function applyIHSG() {
   const el = document.getElementById('ihsg-value');

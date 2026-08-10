@@ -110,8 +110,8 @@
   .ticker .chg.up { color: var(--green); }
   .ticker .chg.down { color: var(--red); }
   .ticker .updated { color: var(--text2); font-size: 0.62rem; }
-  .ticker.hidden { display: none; }
-  .lead.hidden { display: none; }
+  .ticker.hidden { display: none !important; }
+  .lead.hidden { display: none !important; }
   .ticker .refresh-btn {
     background: transparent; border: 1px solid var(--border);
     color: var(--text2); font-size: 0.68rem; font-weight: 600;
@@ -194,7 +194,7 @@
     transition: border-color 0.15s;
   }
   .news-card:hover { border-color: var(--accent); }
-  .news-card.hidden { display: none; }
+  .news-card.hidden { display: none !important; }
   .news-card .stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
   .stripe-up { background: var(--green); }
   .stripe-down { background: var(--red); }
