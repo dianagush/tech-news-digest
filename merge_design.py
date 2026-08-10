@@ -10,7 +10,7 @@ import re, sys
 MAIN = r"C:\Users\DianAgusHermawan\OneDrive - PLN\Hermes\main"
 PREVIEW = r"C:\Users\DianAgusHermawan\OneDrive - PLN\Hermes\main\design-preview.html"
 
-old_html = open(f"{MAIN}\\index.html.bak-20260806", encoding="utf-8").read()
+old_html = open(f"{MAIN}\\index.html", encoding="utf-8").read()
 preview = open(PREVIEW, encoding="utf-8").read()
 
 # ---------- 1. extract CSS dari preview ----------
@@ -21,14 +21,14 @@ css = m_style.group(1)
 def extract_cards(section_html):
     cards = []
     for m in re.finditer(
-        r'<div class="news-card( featured)?[^"]*" data-cat="([^"]+)">(.*?)</div>(?=\s*(?:<div class="news-card|</div>))',
+        r'<div class="news-card( featured)?[^"]*"[^>]*data-cat="([^"]+)">(.*?)</div>(?=\s*(?:<div class="news-card|</div>))',
         section_html, re.S):
         featured, cat, inner = m.group(1), m.group(2), m.group(3)
         stripe = re.search(r'class="stripe ([^"]+)"', inner)
-        tag = re.search(r'class="tag [^"]*">([^<]+)</span>', inner)
-        title = re.search(r"<h3>(.*?)</h3>", inner, re.S)
+        tag = re.search(r'class="tag[^"]*">([^<]+)</span>', inner)
+        title = re.search(r"<h[34]>(.*?)</h[34]>", inner, re.S)
         desc = re.search(r"<p>(.*?)</p>", inner, re.S)
-        src = re.search(r'<div class="source">(.*?)</div>', inner, re.S)
+        src = re.search(r'<span class="source">(.*?)</span>', inner, re.S)
         link = re.search(r'<a class="read-more" href="([^"]+)"[^>]*>', inner)
         cards.append({
             "featured": bool(featured),
@@ -44,10 +44,13 @@ def extract_cards(section_html):
 
 def extract_sections(html):
     sections = []
-    for m in re.finditer(
-        r'<section data-section="([^"]+)">.*?<div class="section-title">[^<]*?</div>(.*?)</section>',
-        html, re.S):
-        name, body = m.group(1), m.group(2)
+    # cari pembuka section; header bisa 2 bentuk lama (section-title) / baru (section)
+    for m in re.finditer(r'<section data-section="([^"]+)">', html):
+        name = m.group(1)
+        body_start = m.end()
+        nxt = html.find('<section data-section=', body_start)
+        body_end = html.rfind('</section>', body_start, nxt if nxt != -1 else len(html))
+        body = html[body_start:body_end]
         sections.append({"name": name, "cards": extract_cards(body)})
     return sections
 
@@ -83,8 +86,17 @@ ticker_us = extract_ticker(old_html, "ticker-us")
 ticker_id = extract_ticker(old_html, "ticker-id")
 
 m_window = re.search(r'<div class="window">(.*?)</div>', old_html, re.S)
-window_text = re.search(r"<strong>(.*?)</strong>.*?<strong>(.*?)</strong>", m_window.group(1), re.S) if m_window else None
-window_html = (f"{window_text.group(1)} → {window_text.group(2)}" if window_text else old_html)
+window_text = None
+if m_window:
+    wt = re.search(r"<strong>(.*?)</strong>\s*→\s*<strong>(.*?)</strong>", m_window.group(1), re.S)
+    if wt:
+        window_text = wt
+    else:
+        # bentuk baru: satu <strong> berisi "09 Agu 11:00 → 10 Agu 2026 11:00 WIB"
+        wt2 = re.search(r"<strong>(.*?)\s*→\s*(.*?)</strong>", m_window.group(1), re.S)
+        if wt2:
+            window_text = wt2
+window_html = (f"{window_text.group(1)} → {window_text.group(2)}" if window_text else "")
 
 m_live_ihsg = re.search(r"const LIVE_IHSG = \{([^}]+)\};", old_html)
 m_live_usd = re.search(r"const LIVE_USDIDR = \{([^}]+)\};", old_html)
@@ -98,7 +110,25 @@ market_date = (m_upd.group(1).rsplit(" ", 1)[0] if m_upd and m_upd.group(1) else
 # ---------- 4. build sections HTML (editorial) ----------
 # LEAD STORY dulu (dipakai loop di bawah)
 all_cards = [c for s in sections for c in s["cards"]]
-lead = next((c for c in all_cards if c["featured"]), all_cards[0] if all_cards else None)
+# lead asli dari index.html (class="lead") — kalau ada, pertahankan
+m_lead = re.search(r'<div class="lead" data-cat="([^"]+)">(.*?)</div>\s*</div>', old_html, re.S)
+if m_lead:
+    lead = {
+        "cat": m_lead.group(1),
+        "stripe": "stripe-up",
+        "tag": re.search(r'<span class="tag">([^<]+)</span>', m_lead.group(2)).group(1)
+               if re.search(r'<span class="tag">([^<]+)</span>', m_lead.group(2)) else m_lead.group(1),
+        "title": re.search(r"<h2>(.*?)</h2>", m_lead.group(2), re.S).group(1)
+                 if re.search(r"<h2>(.*?)</h2>", m_lead.group(2), re.S) else "",
+        "desc": re.search(r"<p>(.*?)</p>", m_lead.group(2), re.S).group(1)
+                if re.search(r"<p>(.*?)</p>", m_lead.group(2), re.S) else "",
+        "source": re.search(r'<span class="src">(.*?)</span>', m_lead.group(2), re.S).group(1)
+                  if re.search(r'<span class="src">(.*?)</span>', m_lead.group(2), re.S) else "",
+        "href": re.search(r'<a class="read-more" href="([^"]+)"', m_lead.group(2)).group(1)
+                if re.search(r'<a class="read-more" href="([^"]+)"', m_lead.group(2)) else "#",
+    }
+else:
+    lead = next((c for c in all_cards if c["featured"]), all_cards[0] if all_cards else None)
 
 section_titles = {
     "ai": "AI & Large Language Models",
@@ -196,7 +226,12 @@ if top5_items:
 '''
 
 # ---------- 5. slicer counts ----------
+# count = kartu grid + lead (lead ikut tampil saat filter kategori itu)
 counts = {s["name"]: len(s["cards"]) for s in sections}
+if lead:
+    lc = lead.get("cat")
+    if lc in counts:
+        counts[lc] += 1
 total_cards = sum(counts.values())
 def slicer_btn(cat, label):
     n = counts.get(cat, total_cards) if cat == "all" else counts.get(cat, 0)
