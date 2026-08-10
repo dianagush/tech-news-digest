@@ -380,7 +380,7 @@ html = f'''<!DOCTYPE html>
 <meta name="description" content="Ringkasan berita teknologi harian dalam Bahasa Indonesia: AI, chip, gadget, earnings, quantum, dan kebijakan. {total_cards} berita pilihan dari sumber kredibel, diperbarui setiap hari kerja pukul 11:00 WIB.">
 <meta name="theme-color" content="#121212">
 <meta name="author" content="Tech News Digest">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23121212'/%3E%3Crect x='4' y='4' width='56' height='56' fill='none' stroke='%23e0483e' stroke-width='3'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' font-weight='bold' fill='%23f0ece4' text-anchor='middle'%3ETD%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23121212'/%3E%3Crect x='4' y='4' width='56' height='56' fill='none' stroke='%23dc2027' stroke-width='3'/%3E%3Ctext x='32' y='44' font-family='Lora,Georgia,serif' font-size='30' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3ETD%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tech News Digest">
 <meta property="og:title" content="Tech News Digest — {window_text.group(2) if window_text else ''}">
@@ -389,6 +389,9 @@ html = f'''<!DOCTYPE html>
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tech News Digest — {window_text.group(2) if window_text else ''}">
 <meta name="twitter:description" content="Ringkasan berita teknologi harian: AI, chip, gadget, earnings, quantum, kebijakan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 {css}
 </style>
