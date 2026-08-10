@@ -226,12 +226,8 @@ if top5_items:
 '''
 
 # ---------- 5. slicer counts ----------
-# count = kartu grid + lead (lead ikut tampil saat filter kategori itu)
+# count = kartu grid saja (lead/highlight TIDAK dihitung, tapi tetap ikut filter saat tampil)
 counts = {s["name"]: len(s["cards"]) for s in sections}
-if lead:
-    lc = lead.get("cat")
-    if lc in counts:
-        counts[lc] += 1
 total_cards = sum(counts.values())
 def slicer_btn(cat, label):
     n = counts.get(cat, total_cards) if cat == "all" else counts.get(cat, 0)
