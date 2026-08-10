@@ -381,7 +381,7 @@ html = f'''<!DOCTYPE html>
   <div class="ticker" role="region" aria-label="Data pasar terkini">
     <div class="item"><span class="label">IHSG</span><span class="val" id="ihsg-value">…</span><span class="chg" id="ihsg-change"></span></div>
     <div class="item"><span class="label">USD/IDR</span><span class="val" id="usdidr-value">…</span><span class="chg" id="usdidr-time"></span></div>
-    <button class="refresh-btn" onclick="refreshLiveData()" aria-label="Perbarui data pasar">⟳ Refresh</button>
+    <button class="refresh-btn" onclick="refreshLiveData()" aria-label="Perbarui data pasar" title="Perbarui data pasar">⟳</button>
   </div>
 
 {top5_html}

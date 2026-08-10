@@ -360,7 +360,7 @@
     .lead h2 { font-size: 1.25rem; }
     .lead p { font-size: 0.9rem; line-height: 1.5; }
     .lead .meta { flex-wrap: wrap; gap: 0.4rem 0.8rem; }
-    .ticker .refresh-btn { align-self: flex-end; margin-top: -1.8rem; }
+    .ticker .refresh-btn { align-self: center; margin: 0 0 0 auto; }
     .ticker-section .ticker { gap: 0 1rem; }
     .news-grid { grid-template-columns: 1fr; }
     .slicers-row { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -383,7 +383,7 @@
     .ticker { flex-wrap: wrap; }
     .ticker .item { display: flex; flex-direction: column; align-items: flex-start; gap: 0.15rem; }
     .ticker .item .chg { font-size: 0.65rem; white-space: nowrap; }
-    .ticker .refresh-btn { align-self: flex-end; margin-top: 0.2rem; }
+    .ticker .refresh-btn { align-self: center; margin: 0 0 0 auto; }
     .ticker-section .ticker { font-size: 0.7rem; gap: 0 0.7rem; }
     .ticker-item { gap: 0.3rem; }
     .ticker-item .change { font-size: 0.66rem; }
@@ -436,7 +436,7 @@
   <div class="ticker" role="region" aria-label="Data pasar terkini">
     <div class="item"><span class="label">IHSG</span><span class="val" id="ihsg-value">…</span><span class="chg" id="ihsg-change"></span></div>
     <div class="item"><span class="label">USD/IDR</span><span class="val" id="usdidr-value">…</span><span class="chg" id="usdidr-time"></span></div>
-    <button class="refresh-btn" onclick="refreshLiveData()" aria-label="Perbarui data pasar">⟳ Refresh</button>
+    <button class="refresh-btn" onclick="refreshLiveData()" aria-label="Perbarui data pasar" title="Perbarui data pasar">⟳</button>
   </div>
 
   <!-- TOP 5 -->
