@@ -97,10 +97,10 @@
 
   /* ============ TICKER (live market) ============ */
   .ticker {
-    display: flex; justify-content: space-between; align-items: baseline;
+    display: flex; justify-content: space-between; align-items: center;
     border: 1px solid var(--border);
     border-left: 4px solid var(--accent);
-    padding: 0.6rem 1rem; margin: 1.4rem 0;
+    padding: 0.55rem 0.9rem; margin: 1.1rem 0;
     background: var(--surface);
     font-size: 0.78rem;
   }
@@ -113,14 +113,13 @@
   .ticker.hidden { display: none !important; }
   .lead.hidden { display: none !important; }
   .ticker .refresh-btn {
-    background: transparent; border: 1px solid var(--border);
-    color: var(--text2); font-size: 0.68rem; font-weight: 600;
-    padding: 0.22rem 0.6rem; border-radius: 2px; cursor: pointer;
-    letter-spacing: 0.05em; white-space: nowrap; line-height: 1.4;
-    transition: color 0.15s, border-color 0.15s;
+    background: transparent; border: none;
+    color: var(--text2); font-size: 0.9rem; line-height: 1;
+    padding: 0.3rem 0.4rem; cursor: pointer;
+    transition: color 0.15s, transform 0.3s;
   }
-  .ticker .refresh-btn:hover { color: var(--accent); border-color: var(--accent); }
-  .ticker .refresh-btn:active { color: var(--bg); background: var(--text); border-color: var(--text); }
+  .ticker .refresh-btn:hover { color: var(--text); transform: rotate(180deg); }
+  .ticker .refresh-btn:active { color: var(--accent); transform: rotate(360deg); }
 
   /* ============ SLICERS (persegi, bukan pill) ============ */
   .slicers-row {
