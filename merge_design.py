@@ -97,6 +97,12 @@ if m_window:
         if wt2:
             window_text = wt2
 window_html = (f"{window_text.group(1)} → {window_text.group(2)}" if window_text else "")
+# group(2) bentuk baru sudah mengandung "WIB" — buang biar tidak dobel di template
+window_html = re.sub(r"\s*WIB\s*$", "", window_html)
+
+# durasi window (isi <span id="win-dur">), mis. "24 jam" / "72 jam"
+m_windur = re.search(r'<span id="win-dur">(.*?)</span>', old_html, re.S)
+win_dur = m_windur.group(1).strip() if m_windur else "24 jam"
 
 m_live_ihsg = re.search(r"const LIVE_IHSG = \{([^}]+)\};", old_html)
 m_live_usd = re.search(r"const LIVE_USDIDR = \{([^}]+)\};", old_html)
@@ -378,7 +384,7 @@ html = f'''<!DOCTYPE html>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tech News Digest">
 <meta property="og:title" content="Tech News Digest — {window_text.group(2) if window_text else ''}">
-<meta property="og:description" content="Ringkasan berita teknologi 24 jam terakhir: AI, chip, gadget, earnings, quantum, kebijakan. Diperbarui tiap hari kerja 11:00 WIB.">
+<meta property="og:description" content="Ringkasan berita teknologi terkini: AI, chip, gadget, earnings, quantum, kebijakan. Diperbarui tiap hari kerja 11:00 WIB.">
 <meta property="og:url" content="https://dianagush.github.io/tech-news-digest/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tech News Digest — {window_text.group(2) if window_text else ''}">
@@ -404,7 +410,7 @@ html = f'''<!DOCTYPE html>
   <header class="masthead">
     <div class="kicker">Ringkasan Harian</div>
     <h1>Tech News Digest</h1>
-    <div class="window">Jendela berita <strong>{window_html}</strong> WIB · 24 jam terakhir</div>
+    <div class="window">Jendela berita <strong>{window_html} WIB</strong> · <span id="win-dur">{win_dur}</span> terakhir</div>
     <div class="rules"><div class="thick"></div><div class="thin"></div></div>
   </header>
 
