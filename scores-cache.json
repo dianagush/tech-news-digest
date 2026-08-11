@@ -1,0 +1,88 @@
+{
+ "window": "10 Agu 11:00 → 11 Agu 2026 11:00 WIB",
+ "since": "2026-08-10T11:00:00+07:00",
+ "until": "2026-08-11T11:00:00+07:00",
+ "updated": "11 Agu 2026 15:41 WIB",
+ "results": [],
+ "fixtures": [
+  {
+   "sport": "sepakbola",
+   "label": "Persahabatan Klub",
+   "kind": "match",
+   "games": [
+    {
+     "h": "Juventus",
+     "a": "Palermo",
+     "hs": null,
+     "as": null,
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/2923.png",
+     "st": "11 Agu 17:00 WIB",
+     "state": "pre",
+     "d": "2026-08-11",
+     "ts": "2026-08-11T10:00Z"
+    },
+    {
+     "h": "Newcastle United",
+     "a": "Everton",
+     "hs": null,
+     "as": null,
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+     "st": "12 Agu 23:15 WIB",
+     "state": "pre",
+     "d": "2026-08-12",
+     "ts": "2026-08-12T16:15Z"
+    },
+    {
+     "h": "FSV Frankfurt",
+     "a": "Eintracht Frankfurt",
+     "hs": null,
+     "as": null,
+     "hl": "",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/125.png",
+     "st": "12 Agu 23:30 WIB",
+     "state": "pre",
+     "d": "2026-08-12",
+     "ts": "2026-08-12T16:30Z"
+    }
+   ]
+  },
+  {
+   "sport": "mma",
+   "label": "UFC / MMA",
+   "kind": "bout",
+   "games": [
+    {
+     "st": "12 Agu 06:00 WIB",
+     "state": "pre",
+     "d": "2026-08-12",
+     "ts": "2026-08-11T23:00Z",
+     "note": "Dana White's Contender Series: Season 10, Week 1",
+     "h": "Joe Kropschot",
+     "a": "Jon Kunneman",
+     "hs": null,
+     "as": null,
+     "hl": "",
+     "al": ""
+    }
+   ]
+  },
+  {
+   "sport": "tenis",
+   "label": "Tenis ATP",
+   "kind": "event",
+   "games": [
+    {
+     "n": "Cincinnati Open",
+     "st": "11 Agu 11:00 WIB",
+     "state": "pre",
+     "venue": "",
+     "d": "2026-08-11",
+     "ts": "2026-08-11T04:00Z"
+    }
+   ]
+  }
+ ],
+ "calls": 14
+}

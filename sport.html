@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sport Digest — 11 Agu 2026 11:00 WIB</title>
+<meta name="description" content="Ringkasan berita olahraga harian dalam Bahasa Indonesia: sepakbola, motorsport, basket, tenis, bulutangkis, MMA. Dilengkapi papan skor dan jadwal klub besar Eropa.">
+<meta name="theme-color" content="#121212">
+<meta name="author" content="Sport Digest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23121212'/%3E%3Crect x='4' y='4' width='56' height='56' fill='none' stroke='%2312a150' stroke-width='3'/%3E%3Ctext x='32' y='44' font-family='Lora,Georgia,serif' font-size='30' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3ESD%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sport Digest">
+<meta property="og:title" content="Sport Digest — 11 Agu 2026 11:00 WIB">
+<meta property="og:description" content="Ringkasan berita olahraga harian: sepakbola, motorsport, basket, tenis, bulutangkis, MMA. Plus skor dan jadwal klub besar Eropa.">
+<meta property="og:url" content="https://dianagush.github.io/tech-news-digest/sport.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sport Digest — 11 Agu 2026 11:00 WIB">
+<meta name="twitter:description" content="Ringkasan berita olahraga harian plus skor dan jadwal klub besar Eropa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ PALET — THE JAKARTA POST ============ */
+  /* Light = acuan TJP asli (putih, #E5E5E5, #6B6B6A, merah #dc2027).
+     Dark = turunan; #dc2027 gagal kontras di atas hitam, dinaikkan ke #e5484d. */
+  :root, [data-theme="dark"] {
+    --bg: #121212;
+    --surface: #1a1a1a;
+    --surface2: #222222;
+    --border: #2e2e2e;
+    --text: #e8e8e8;
+    --text2: #a3a3a3;
+    --accent: #e5484d;
+    --badge: #e5484d;
+    --green: #2e9e63;
+    --red: #e5484d;
+    --blue: #4a90d9;
+    --rule: #333333;
+  }
+  [data-theme="light"] {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface2: #f7f7f7;
+    --border: #e5e5e5;
+    --text: #000000;
+    --text2: #6b6b6a;
+    --accent: #dc2027;
+    --badge: #dd1e26;
+    --green: #1a7f4b;
+    --red: #dc2027;
+    --blue: #1565c0;
+    --rule: #e5e5e5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: background 0.25s, color 0.25s;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ============ TOP BAR ============ */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+  .topbar .edition {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text2); font-weight: 700;
+  }
+  .topbar .edition strong { color: var(--accent); font-weight: 900; }
+  .theme-toggle {
+    background: transparent; border: none;
+    color: var(--text); padding: 0.3rem 0.45rem;
+    font-size: 0.7rem; cursor: pointer; font-weight: 600;
+    border-radius: 3px; letter-spacing: 0.05em;
+    display: inline-flex; align-items: center; justify-content: center;
+    line-height: 0;
+  }
+  .theme-toggle:hover { color: var(--accent); }
+  .theme-toggle svg { width: 15px; height: 15px; display: block; }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+  /* ============ MASTHEAD ============ */
+  header.masthead { text-align: center; padding: 1.1rem 0 1.3rem; }
+  .masthead .kicker {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.63rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); font-weight: 900; margin-bottom: 0.55rem;
+  }
+  .masthead h1 {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700; letter-spacing: -0.01em; line-height: 1.08;
+    color: var(--text);
+  }
+  .masthead .window {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.76rem; color: var(--text2); margin-top: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .masthead .window strong { color: var(--text); font-weight: 700; }
+  /* TJP pakai garis tipis tunggal, bukan tebal-tipis */
+  .rules { display: flex; align-items: center; gap: 0; margin-top: 1rem; }
+  .rules .thick { flex: 1; border-top: 1px solid var(--border); }
+  .rules .thin { flex: 0; border: none; }
+
+  /* ============ TICKER (live market) ============ */
+  .ticker {
+    display: flex; justify-content: space-between; align-items: center;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 0.55rem 0.9rem; margin: 1.1rem 0;
+    background: var(--surface2);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
+    border-radius: 3px;
+  }
+  .ticker .item { display: flex; gap: 0.5rem; align-items: baseline; }
+  .ticker .label { color: var(--text2); font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase; font-weight: 700; }
+  .ticker .val { font-weight: 900; font-variant-numeric: tabular-nums; }
+  .ticker .chg.up { color: var(--green); }
+  .ticker .chg.down { color: var(--red); }
+  .ticker .updated { color: var(--text2); font-size: 0.62rem; }
+  .ticker.hidden { display: none !important; }
+  .lead.hidden { display: none !important; }
+  .ticker .refresh-btn {
+    background: transparent; border: none;
+    color: var(--text2); font-size: 0.9rem; line-height: 1;
+    padding: 0.3rem 0.4rem; cursor: pointer;
+    transition: color 0.15s, transform 0.3s;
+  }
+  .ticker .refresh-btn:hover { color: var(--text); transform: rotate(180deg); }
+  .ticker .refresh-btn:active { color: var(--accent); transform: rotate(360deg); }
+
+  /* ============ SLICERS ============ */
+  .slicers-row {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin: 1.25rem 0 1.6rem;
+  }
+  .slicer-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text2);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.71rem; font-weight: 700;
+    padding: 0.32rem 0.8rem; border-radius: 3px; cursor: pointer;
+    letter-spacing: 0.03em; text-transform: uppercase;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .slicer-btn .count { opacity: 0.6; margin-left: 0.25rem; font-size: 0.62rem; }
+  .slicer-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .slicer-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* ============ LEAD STORY ============ */
+  .lead {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.35rem 0 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .lead .tag-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; }
+  .lead .tag {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.62rem; font-weight: 900; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #fff;
+    background: var(--badge); padding: 0.15rem 0.5rem; border-radius: 3px;
+  }
+  .lead .tag-row::after { content: ''; flex: 1; border-top: 1px solid var(--border); }
+  .lead h2 {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.45rem, 3.4vw, 2.1rem);
+    font-weight: 700; line-height: 1.22; margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .lead p {
+    font-family: 'Lato', sans-serif;
+    color: var(--text2); font-size: 0.94rem; max-width: 75ch; line-height: 1.55;
+  }
+  .lead .meta {
+    font-family: 'Lato', sans-serif;
+    margin-top: 0.75rem; font-size: 0.68rem; color: var(--text2);
+    display: flex; gap: 1rem;
+  }
+  .lead .meta .src { font-weight: 700; color: var(--text); }
+  .lead .meta .sent { font-weight: 700; }
+  .sent.up { color: var(--green); }
+  .sent.down { color: var(--red); }
+  .sent.neutral { color: var(--blue); }
+
+  /* ============ SECTION ============ */
+  /* TJP: label Lato 900 uppercase + garis tipis, bukan rules tebal */
+  .section {
+    margin: 2rem 0 0.8rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    border-top: 1px solid var(--border); padding-top: 0.85rem;
+  }
+  .section h3 {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem; font-weight: 900; white-space: nowrap;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .section h3::before {
+    content: ''; display: inline-block;
+    width: 4px; height: 0.85rem; background: var(--accent);
+    margin-right: 0.55rem; vertical-align: -1px;
+  }
+  .section .rule-thick { display: none; }
+  .section .rule-thin { flex: 1; border-top: 1px solid var(--border); }
+
+  /* ============ NEWS GRID ============ */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .news-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1rem 1.05rem 0.9rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .news-card:hover { border-color: var(--accent); box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+  .news-card.hidden { display: none !important; }
+  /* stripe sentimen dipindah ke atas kartu, tipis — TJP tidak pakai bar kiri */
+  .news-card .stripe { position: absolute; left: 0; right: 0; top: 0; height: 2px; bottom: auto; width: auto; }
+  .stripe-up { background: var(--green); }
+  .stripe-down { background: var(--red); }
+  .stripe-neutral { background: var(--blue); }
+
+  /* badge kategori CSS-only dari data-cat — HTML kartu tidak perlu diubah */
+  .news-card::before {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.58rem; font-weight: 900; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #fff; background: var(--badge);
+    padding: 0.12rem 0.45rem; border-radius: 3px;
+    align-self: flex-start; line-height: 1.5;
+  }
+  .news-card[data-cat="ai"]::before       { content: 'AI'; }
+  .news-card[data-cat="earnings"]::before { content: 'Earnings'; }
+  .news-card[data-cat="chip"]::before     { content: 'Chip'; }
+  .news-card[data-cat="gadget"]::before   { content: 'Gadget'; }
+  .news-card[data-cat="quantum"]::before  { content: 'Quantum'; }
+  .news-card[data-cat="policy"]::before   { content: 'Policy'; }
+  .news-card[data-cat="other"]::before    { content: 'Lain-lain'; }
+
+  .news-card .tag {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text2);
+  }
+  .news-card .tag::after { content: ''; }
+  .news-card h4 {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    font-size: 1rem; font-weight: 600; line-height: 1.34;
+    color: var(--text); letter-spacing: -0.005em;
+  }
+  .news-card p {
+    font-family: 'Lato', sans-serif;
+    color: var(--text2); font-size: 0.79rem; line-height: 1.55; flex: 1;
+  }
+  .news-card .foot {
+    font-family: 'Lato', sans-serif;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 0.55rem; padding-top: 0.55rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.64rem; color: var(--text2);
+  }
+  .news-card .foot .read-more { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .news-card .foot .read-more::after { content: ' →'; }
+
+  footer {
+    font-family: 'Lato', sans-serif;
+    margin-top: 3rem; padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.68rem; color: var(--text2);
+    text-align: center; letter-spacing: 0.04em;
+  }
+
+  /* ============ BACKGROUND TECH GRAPHIC ============ */
+  /* TJP bersih tanpa tekstur — dimatikan, class tetap ada agar JS tidak error */
+  .bg-layer { display: none; }
+
+  /* ============ MARKET TICKER (minimalis) ============ */
+  .ticker-section { margin: 1.1rem 0 1.4rem; }
+  .ticker-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text2); margin-right: 0.5rem; white-space: nowrap; font-weight: 700;
+  }
+  .ticker-section .ticker {
+    display: flex; flex-wrap: wrap; gap: 0 1.4rem;
+    border: none; border-top: 1px solid var(--border);
+    background: transparent; padding: 0.55rem 0 0;
+    margin: 0.5rem 0 0; font-size: 0.75rem;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    white-space: nowrap; border-radius: 0;
+  }
+  .ticker-item {
+    display: flex; align-items: baseline; gap: 0.4rem;
+    padding: 0.15rem 0;
+  }
+  .ticker-item .sym {
+    font-weight: 900; letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums; color: var(--text2);
+  }
+  .ticker-item .change {
+    font-size: 0.72rem; font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .ticker-item .change.up { color: var(--green); }
+  .ticker-item .change.down { color: var(--red); }
+  .ticker-item .change.up::before { content: '▲ '; font-size: 0.62rem; }
+  .ticker-item .change.down::before { content: '▼ '; font-size: 0.62rem; }
+
+  /* ============ STICKY SLICER BAR ============ */
+  .slicers-row.sticky {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg); padding: 0.5rem 0;
+    margin: 0 -0.5rem 1rem; padding-left: 0.5rem; padding-right: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .slicers-row.sticky::-webkit-scrollbar { height: 3px; }
+  .slicers-row.sticky::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ============ TOP 5 SUMMARY ============ */
+  .top5 {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    background: var(--surface2);
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 3px;
+  }
+  .top5 h3 {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem; font-weight: 900; margin-bottom: 0.5rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text);
+  }
+  .top5 ol { list-style: none; counter-reset: top5; padding: 0; }
+  .top5 li {
+    counter-increment: top5;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.82rem; line-height: 1.5;
+    padding: 0.2rem 0 0.2rem 1.6rem;
+    position: relative;
+  }
+  .top5 li::before {
+    content: counter(top5);
+    position: absolute; left: 0; top: 0.2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900; color: var(--accent); font-size: 0.72rem;
+  }
+  .top5 li a { color: var(--text); }
+  .top5 li a:hover { color: var(--accent); }
+  .top5 li .cat-tag {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.58rem; font-weight: 900; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text2); margin-left: 0.4rem;
+  }
+
+  /* ============ CARD DATE PROMINENCE ============ */
+  .news-card .date-main {
+    font-weight: 700; color: var(--text); font-size: 0.68rem;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .container { padding: 1rem 0.8rem 3rem; }
+    .topbar { padding-bottom: 0.5rem; margin-bottom: 1.1rem; }
+    .masthead { padding: 0.6rem 0 0.9rem; }
+    .masthead h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
+    .masthead .kicker { font-size: 0.58rem; }
+    .masthead .window { font-size: 0.72rem; }
+    .lead h2 { font-size: 1.3rem; }
+    .lead p { font-size: 0.9rem; line-height: 1.5; }
+    .lead .meta { flex-wrap: wrap; gap: 0.4rem 0.8rem; }
+    .ticker .refresh-btn { align-self: center; margin: 0 0 0 auto; }
+    .ticker-section .ticker { gap: 0 1rem; }
+    .news-grid { grid-template-columns: 1fr; }
+    .slicers-row { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .slicers-row.sticky { margin: 0 -0.8rem 0.9rem; padding-left: 0.8rem; padding-right: 0.8rem; }
+    .section h3 { font-size: 0.78rem; }
+    .top5 { padding: 0.8rem 0.9rem; margin-bottom: 1.1rem; }
+    .top5 h3 { font-size: 0.68rem; }
+    .top5 li { font-size: 0.84rem; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0.7rem 0.6rem 3rem; }
+    .topbar { flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+    .masthead { padding: 0.8rem 0 1rem; }
+    .masthead h1 { font-size: 1.6rem; }
+    .masthead .window { font-size: 0.7rem; }
+    .lead h2 { font-size: 1.15rem; }
+    .lead p { font-size: 0.85rem; }
+    .lead .meta { flex-direction: column; gap: 0.2rem; }
+    .ticker .item { font-size: 0.7rem; }
+    .ticker { flex-wrap: wrap; }
+    .ticker .item { display: flex; flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+    .ticker .item .chg { font-size: 0.65rem; white-space: nowrap; }
+    .ticker .refresh-btn { align-self: center; margin: 0 0 0 auto; }
+    .ticker-section .ticker { font-size: 0.7rem; gap: 0 0.7rem; }
+    .ticker-item { gap: 0.3rem; }
+    .ticker-item .change { font-size: 0.66rem; }
+    .news-card { padding: 0.85rem 0.9rem 0.75rem; }
+    .news-card h4 { font-size: 0.92rem; }
+    .top5 li { display: flex; flex-wrap: wrap; gap: 0.3rem 0.5rem; }
+    .top5 .cat-tag { margin-left: auto; }
+    .slicers-row.sticky { margin: 0 -0.6rem 0.8rem; padding-left: 0.6rem; padding-right: 0.6rem; }
+    .slicer-btn { padding: 0.3rem 0.65rem; font-size: 0.68rem; white-space: nowrap; }
+    footer { font-size: 0.62rem; }
+  }
+
+  /* ============ PRINT ============ */
+  @media print {
+    .bg-layer, .theme-toggle, .refresh-btn, .slicers-row, .ticker-section { display: none !important; }
+    body { background: #fff !important; color: #000 !important; }
+    .container { max-width: 100% !important; padding: 0 !important; }
+    .masthead h1, .lead h2, .news-card h4, .section h3 { color: #000 !important; }
+    .news-card { border: 1px solid #ccc !important; break-inside: avoid; }
+    .lead { border-top: 1px solid #000 !important; }
+    .stripe { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .news-card::before { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    a { color: #000 !important; text-decoration: none !important; }
+    .top5 { break-inside: avoid; }
+  }
+
+
+/* ================================================================
+   SPORT DIGEST — override di atas tjp-design.css
+   Blok ini DITEMPEL SETELAH tjp-design.css, jadi deklarasi di sini menang.
+   Hanya: palet aksen halaman, nav antar halaman, dan komponen skor.
+   Warna sentimen (--green/--red) sengaja TIDAK disentuh.
+   ================================================================ */
+
+  /* ---- aksen halaman: hijau lapangan (tech = merah TJP) ---- */
+  :root, [data-theme="dark"] {
+    --accent: #12a150;
+    --badge: #12a150;
+  }
+  [data-theme="light"] {
+    --accent: #0f7a3d;
+    --badge: #0f7a3d;
+  }
+
+  /* ---- NAV ANTAR HALAMAN ---- */
+  .site-nav { display: flex; gap: 1.1rem; align-items: center; }
+  .site-nav a {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 700; color: var(--text2);
+    padding-bottom: 0.2rem; border-bottom: 2px solid transparent;
+  }
+  .site-nav a:hover { color: var(--text); text-decoration: none; }
+  .site-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ---- BADGE KATEGORI KARTU (CSS-only, dari data-cat) ---- */
+  .news-card[data-cat="sepakbola"]::before  { content: 'Sepakbola'; }
+  .news-card[data-cat="motorsport"]::before { content: 'Motorsport'; }
+  .news-card[data-cat="basket"]::before     { content: 'Basket'; }
+  .news-card[data-cat="tenis"]::before      { content: 'Tenis'; }
+  .news-card[data-cat="badminton"]::before  { content: 'Bulutangkis'; }
+  .news-card[data-cat="mma"]::before        { content: 'MMA'; }
+  .news-card[data-cat="lainnya"]::before    { content: 'Lain-lain'; }
+
+  /* ================================================================
+     PAPAN SKOR
+     ================================================================ */
+  .scoreboard {
+    border-top: 3px solid var(--text);
+    border-bottom: 1px solid var(--border);
+    margin: 1.6rem 0 2rem;
+    padding-top: 0.9rem;
+  }
+  .scoreboard-head {
+    display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap;
+    margin-bottom: 0.9rem;
+  }
+  .scoreboard-head h3 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em;
+  }
+  .scoreboard-head .stamp {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text2);
+  }
+  .scoreboard-head .stamp b { color: var(--accent); font-weight: 900; }
+
+  /* filter cabang */
+  .sport-slicers { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+
+  .score-group { margin-bottom: 1.3rem; }
+  .score-group.hidden { display: none !important; }
+
+  /* label blok: Hasil Terkini / Jadwal Berikutnya */
+  .score-block-label {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.95rem; font-weight: 700; color: var(--text);
+    border-bottom: 2px solid var(--text);
+    padding-bottom: 0.25rem; margin: 0.4rem 0 0.9rem;
+  }
+  .score-block-label + .score-group { margin-top: 0; }
+
+  .score-group-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 900; color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem; margin-bottom: 0.5rem;
+  }
+
+  .score-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr 8.5rem;
+    align-items: center; gap: 0.6rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dotted var(--border);
+  }
+  .score-row:last-child { border-bottom: none; }
+
+  .score-team { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+  .score-team.away { flex-direction: row-reverse; text-align: right; }
+  .score-team .nm {
+    font-size: 0.86rem; font-weight: 700; color: var(--text);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .crest { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
+  .crest-fb {
+    width: 22px; height: 22px; flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border); background: var(--surface2);
+    font-family: 'Lato', sans-serif; font-size: 0.6rem; font-weight: 900;
+    color: var(--text2);
+  }
+
+  .score-num {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.05rem; font-weight: 700; letter-spacing: 0.04em;
+    white-space: nowrap; padding: 0 0.35rem;
+  }
+  .score-num.vs {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text2); font-weight: 700;
+  }
+
+  .score-status {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.63rem; letter-spacing: 0.06em;
+    color: var(--text2); text-align: right; white-space: nowrap;
+  }
+  .score-status.post { color: var(--text2); }
+  .score-status.live { color: var(--green); font-weight: 900; }
+  .score-status.live::before {
+    content: ''; display: inline-block;
+    width: 6px; height: 6px; margin-right: 0.35rem;
+    background: var(--green); border-radius: 50%;
+    animation: livedot 1.4s ease-in-out infinite;
+  }
+  @keyframes livedot { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  /* baris event tunggal (F1 / MotoGP / tenis) */
+  .score-single {
+    display: grid; grid-template-columns: 1fr 9.5rem;
+    align-items: center; gap: 0.6rem;
+    padding: 0.5rem 0; border-bottom: 1px dotted var(--border);
+  }
+  .score-single:last-child { border-bottom: none; }
+  .score-single .nm { font-size: 0.86rem; font-weight: 700; color: var(--text); }
+  .score-single .venue { font-size: 0.7rem; color: var(--text2); }
+
+  .score-empty {
+    font-size: 0.78rem; color: var(--text2); font-style: italic;
+    padding: 0.6rem 0;
+  }
+  .score-note {
+    font-size: 0.68rem; color: var(--text2);
+    margin-top: 0.5rem; padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    .score-row { grid-template-columns: 1fr auto 1fr; row-gap: 0.25rem; }
+    .score-status { grid-column: 1 / -1; text-align: left; }
+    .score-single { grid-template-columns: 1fr; }
+    .score-single .venue { text-align: left; }
+    .site-nav { gap: 0.8rem; }
+    .site-nav a { font-size: 0.6rem; letter-spacing: 0.1em; }
+  }
+  @media (max-width: 480px) {
+    .score-team .nm { font-size: 0.78rem; }
+    .crest, .crest-fb { width: 18px; height: 18px; }
+    .score-num { font-size: 0.95rem; }
+    .scoreboard-head h3 { font-size: 1rem; }
+  }
+
+  @media print {
+    .site-nav, .sport-slicers { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="container">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <nav class="site-nav" aria-label="Navigasi halaman">
+      <a href="index.html">Tech</a>
+      <a href="sport.html" class="active" aria-current="page">Sport</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema gelap/terang" aria-label="Ganti tema gelap atau terang">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="kicker">Ringkasan Olahraga Harian</div>
+    <h1>Sport Digest</h1>
+    <div class="window">Jendela berita <strong>10 Agu 11:00 → 11 Agu 2026 11:00 WIB</strong> · <span id="win-dur">24 jam</span> terakhir</div>
+    <div class="rules"><div class="thick"></div><div class="thin"></div></div>
+  </header>
+
+  <!-- PAPAN SKOR -->
+  <div class="scoreboard">
+    <div class="scoreboard-head">
+      <h3>Skor &amp; Jadwal</h3>
+      <span class="stamp">Snapshot <b id="score-stamp">—</b></span>
+    </div>
+    <div class="sport-slicers" role="group" aria-label="Filter cabang olahraga">
+      <button class="slicer-btn active" data-sport="all" onclick="filterSport('all')">Semua</button>
+      <button class="slicer-btn" data-sport="sepakbola" onclick="filterSport('sepakbola')">Sepakbola</button>
+      <button class="slicer-btn" data-sport="tenis" onclick="filterSport('tenis')">Tenis</button>
+      <button class="slicer-btn" data-sport="mma" onclick="filterSport('mma')">MMA</button>
+    </div>
+    <div id="scoreboard-body"></div>
+    <div class="score-note">Sepakbola dibatasi pada klub besar Eropa; hasil memakai jendela waktu yang sama dengan berita. Sumber: ESPN &amp; TheSportsDB · snapshot diperbarui otomatis pukul 11:00, 18:00, dan 22:00 WIB.</div>
+  </div>
+
+  <!-- NEWS SLICERS -->
+  <div class="slicers-row sticky" id="categorySlicers" role="group" aria-label="Filter kategori berita">
+    <button class="slicer-btn active" data-cat="all">Semua <span class="count">(8)</span></button>
+    <button class="slicer-btn" data-cat="sepakbola">Sepakbola <span class="count">(4)</span></button>
+    <button class="slicer-btn" data-cat="motorsport">Motorsport <span class="count">(1)</span></button>
+    <button class="slicer-btn" data-cat="basket">Basket <span class="count">(1)</span></button>
+    <button class="slicer-btn" data-cat="tenis">Tenis <span class="count">(1)</span></button>
+    <button class="slicer-btn" data-cat="badminton">Bulutangkis <span class="count">(1)</span></button>
+  </div>
+
+  <div id="news-container">
+    <section data-section="sepakbola">
+    <div class="section"><div class="rule-thick"></div><h3>Sepakbola</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+    <div class="news-card" id="card-1" data-cat="sepakbola">
+      <div class="stripe stripe-up"></div>
+      <span class="tag">Persib</span>
+      <h4>Persib Tahan Imbang Bali United di Kandang</h4>
+      <p>Laga pekan ketiga Liga 1 berakhir 1-1 setelah gol penyeimbang di menit akhir. Persib tetap di puncak klasemen sementara dengan selisih dua poin.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Bola.net</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-2" data-cat="sepakbola">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Timnas</span>
+      <h4>Timnas Indonesia Panggil 26 Pemain untuk Kualifikasi</h4>
+      <p>Pelatih mengumumkan skuad untuk dua laga kualifikasi bulan depan, termasuk tiga pemain debutan dari klub Liga 1.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Detik Sport</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-3" data-cat="sepakbola">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Pramusim</span>
+      <h4>Juventus Jamu Palermo di Laga Uji Coba Terakhir</h4>
+      <p>Pertandingan persahabatan menjadi gladi resik sebelum Serie A bergulir, dengan dua rekrutan anyar diperkirakan tampil sejak menit pertama.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">Football Italia</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-4" data-cat="sepakbola">
+      <div class="stripe stripe-up"></div>
+      <span class="tag">Transfer</span>
+      <h4>Bursa Transfer Eropa Tembus Rekor Musim Panas</h4>
+      <p>Total belanja klub lima liga top melewati angka musim lalu sebulan sebelum jendela transfer ditutup.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Sky Sports</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    </div>
+    </section>
+    <section data-section="motorsport">
+    <div class="section"><div class="rule-thick"></div><h3>Motorsport</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+    <div class="news-card" id="card-5" data-cat="motorsport">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Formula 1</span>
+      <h4>Dutch GP Jadi Penentu Perebutan Gelar</h4>
+      <p>Selisih poin di klasemen menyempit menjelang balapan kandang tim papan atas.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Autosport</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    </div>
+    </section>
+    <section data-section="basket">
+    <div class="section"><div class="rule-thick"></div><h3>Basket</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+    <div class="news-card" id="card-6" data-cat="basket">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">NBA</span>
+      <h4>Jadwal NBA 2026-27 Dirilis, Musim Dibuka Awal Oktober</h4>
+      <p>Liga mengumumkan kalender lengkap; laga pembuka mempertemukan finalis musim lalu.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">ESPN</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    </div>
+    </section>
+    <section data-section="tenis">
+    <div class="section"><div class="rule-thick"></div><h3>Tenis</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+    <div class="news-card" id="card-7" data-cat="tenis">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">ATP</span>
+      <h4>Cincinnati Open Dimulai, Unggulan Teratas Dapat Bye</h4>
+      <p>Turnamen Masters 1000 terakhir sebelum US Open menghadirkan hampir seluruh pemain sepuluh besar dunia.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">ATP Tour</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    </div>
+    </section>
+    <section data-section="badminton">
+    <div class="section"><div class="rule-thick"></div><h3>Bulutangkis</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+    <div class="news-card" id="card-8" data-cat="badminton">
+      <div class="stripe stripe-up"></div>
+      <span class="tag">BWF</span>
+      <h4>Indonesia Kirim 12 Wakil ke Kejuaraan Dunia</h4>
+      <p>Skuad terdiri dari lima sektor dengan tunggal putra sebagai andalan medali.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Antara</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    </div>
+    </section>
+  </div>
+
+  <footer>Sport Digest · Disusun otomatis oleh Hermes Agent · Skor: ESPN &amp; TheSportsDB</footer>
+</div>
+
+<script>
+// === SKOR (snapshot di-embed server-side oleh fetch_scores.py) ===
+const SCORES = {"window": "10 Agu 11:00 → 11 Agu 2026 11:00 WIB", "since": "2026-08-10T11:00:00+07:00", "until": "2026-08-11T11:00:00+07:00", "updated": "11 Agu 2026 15:41 WIB", "results": [], "fixtures": [{"sport": "sepakbola", "label": "Persahabatan Klub", "kind": "match", "games": [{"h": "Juventus", "a": "Palermo", "hs": null, "as": null, "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png", "al": "https://a.espncdn.com/i/teamlogos/soccer/500/2923.png", "st": "11 Agu 17:00 WIB", "state": "pre", "d": "2026-08-11", "ts": "2026-08-11T10:00Z"}, {"h": "Newcastle United", "a": "Everton", "hs": null, "as": null, "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png", "al": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png", "st": "12 Agu 23:15 WIB", "state": "pre", "d": "2026-08-12", "ts": "2026-08-12T16:15Z"}, {"h": "FSV Frankfurt", "a": "Eintracht Frankfurt", "hs": null, "as": null, "hl": "", "al": "https://a.espncdn.com/i/teamlogos/soccer/500/125.png", "st": "12 Agu 23:30 WIB", "state": "pre", "d": "2026-08-12", "ts": "2026-08-12T16:30Z"}]}, {"sport": "mma", "label": "UFC / MMA", "kind": "bout", "games": [{"st": "12 Agu 06:00 WIB", "state": "pre", "d": "2026-08-12", "ts": "2026-08-11T23:00Z", "note": "Dana White's Contender Series: Season 10, Week 1", "h": "Joe Kropschot", "a": "Jon Kunneman", "hs": null, "as": null, "hl": "", "al": ""}]}, {"sport": "tenis", "label": "Tenis ATP", "kind": "event", "games": [{"n": "Cincinnati Open", "st": "11 Agu 11:00 WIB", "state": "pre", "venue": "", "d": "2026-08-11", "ts": "2026-08-11T04:00Z"}]}], "calls": 14};
+
+function crest(url, nama) {
+  if (url) {
+    return '<img class="crest" src="' + url + '" alt="" loading="lazy" ' +
+           'onerror="this.outerHTML=\'<span class=&quot;crest-fb&quot;>' +
+           nama.slice(0, 2).toUpperCase() + '</span>\'">';
+  }
+  return '<span class="crest-fb">' + nama.slice(0, 2).toUpperCase() + '</span>';
+}
+
+function statusClass(state) {
+  if (state === 'in') return 'score-status live';
+  if (state === 'post') return 'score-status post';
+  return 'score-status';
+}
+
+function rowMatch(g) {
+  const skor = (g.hs !== null && g.hs !== undefined)
+    ? '<span class="score-num">' + g.hs + ' &ndash; ' + g.as + '</span>'
+    : '<span class="score-num vs">vs</span>';
+  return '<div class="score-row">' +
+    '<div class="score-team">' + crest(g.hl, g.h) + '<span class="nm">' + g.h + '</span></div>' +
+    skor +
+    '<div class="score-team away">' + crest(g.al, g.a) + '<span class="nm">' + g.a + '</span></div>' +
+    '<div class="' + statusClass(g.state) + '">' + g.st + '</div>' +
+    '</div>';
+}
+
+function rowSingle(g) {
+  return '<div class="score-single">' +
+    '<div><span class="nm">' + (g.n || '') + '</span>' +
+    (g.venue ? '<div class="venue">' + g.venue + '</div>' : '') + '</div>' +
+    '<div class="' + statusClass(g.state) + '">' + g.st + '</div>' +
+    '</div>';
+}
+
+function renderGroups(groups) {
+  return groups.map(function (grp) {
+    const rows = grp.games.map(function (g) {
+      return (g.n !== undefined) ? rowSingle(g) : rowMatch(g);
+    }).join('');
+    return '<div class="score-group" data-sport="' + grp.sport + '">' +
+      '<div class="score-group-label">' + grp.label + '</div>' + rows + '</div>';
+  }).join('');
+}
+
+function renderScores() {
+  const box = document.getElementById('scoreboard-body');
+  document.getElementById('score-stamp').textContent = SCORES.updated;
+  let html = '<div class="score-block-label">Hasil Terkini</div>';
+  html += SCORES.results.length
+    ? renderGroups(SCORES.results)
+    : '<div class="score-empty">Tidak ada pertandingan klub besar yang selesai dalam jendela ini.</div>';
+  if (SCORES.fixtures.length) {
+    html += '<div class="score-block-label">Jadwal Berikutnya</div>' + renderGroups(SCORES.fixtures);
+  }
+  box.innerHTML = html;
+}
+renderScores();
+
+function filterSport(sport) {
+  document.querySelectorAll('.slicer-btn[data-sport]').forEach(function (b) {
+    b.classList.remove('active');
+  });
+  const btn = document.querySelector('.slicer-btn[data-sport="' + sport + '"]');
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('.score-group').forEach(function (grp) {
+    grp.classList.toggle('hidden', sport !== 'all' && grp.dataset.sport !== sport);
+  });
+}
+
+// === THEME TOGGLE ===
+function toggleTheme() {
+  const root = document.documentElement;
+  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  root.dataset.theme = next;
+  localStorage.setItem('hermes-news-theme', next);
+}
+(function () {
+  const saved = localStorage.getItem('hermes-news-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+})();
+
+// === CATEGORY SLICERS ===
+const cards = document.querySelectorAll('.news-card, .lead');
+const sections = document.querySelectorAll('section[data-section]');
+
+function applyFilters(cat) {
+  cards.forEach(function (card) {
+    const cardCats = card.dataset.cat.split(' ');
+    const catMatch = cat === 'all' || cardCats.includes(cat);
+    card.classList.toggle('hidden', !catMatch);
+  });
+  sections.forEach(function (section) {
+    const visible = section.querySelectorAll('.news-card:not(.hidden)');
+    section.style.display = visible.length === 0 ? 'none' : '';
+  });
+}
+
+const newsSlicers = document.querySelectorAll('#categorySlicers .slicer-btn');
+newsSlicers.forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    newsSlicers.forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    applyFilters(btn.dataset.cat);
+  });
+});
+
+// === DAILY BACKGROUND ===
+(function () {
+  const variants = ['bg-circuit', 'bg-dots', 'bg-hex', 'bg-scan', 'bg-blueprint', 'bg-signal', 'bg-chip'];
+  const d = new Date();
+  const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  document.body.classList.add(variants[seed % variants.length]);
+})();
+</script>
+</body>
+</html>
