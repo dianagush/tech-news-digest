@@ -408,9 +408,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-{css}
-</style>
+<style>{css}</style>
 </head>
 <body>
 <div class="bg-layer"></div>
