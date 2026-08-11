@@ -1,476 +1,45 @@
-"""Generate design-preview.html — varian desain ala The Jakarta Post.
+"""Bangun design-preview.html dari index.html + tjp-design.css.
 
-Baca index.html (sumber kebenaran struktur), ganti blok <style> + sisipkan
-Google Fonts, tulis ke design-preview.html. Struktur HTML/JS tidak disentuh
-sama sekali — hanya CSS. Badge kategori dirender CSS-only dari data-cat,
-jadi kartu hasil cron tidak perlu markup tambahan.
+CSS TIDAK lagi disimpan di script ini (dulu ada 3 salinan: index.html,
+design-preview.html, dan string di sini — ubah satu, dua lainnya basi).
+Sumber tunggal sekarang: tjp-design.css.
 
-Jalankan ulang kapan saja: python make_tjp_preview.py
+Struktur HTML/JS tidak disentuh sama sekali — hanya blok <style>, <link> font,
+dan palet favicon.
+
+Jalankan: python make_tjp_preview.py
 """
 import re, pathlib, sys
 
 REPO = pathlib.Path(__file__).resolve().parent
 SRC = REPO / "index.html"
+CSS_FILE = REPO / "tjp-design.css"
 OUT = REPO / "design-preview.html"
 
 html = SRC.read_text(encoding="utf-8")
+css = CSS_FILE.read_text(encoding="utf-8")
 
-# ---------------------------------------------------------------- fonts
 FONTS = """<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 """
 
-# ---------------------------------------------------------------- css
-CSS = r"""
-  /* ============ PALET — THE JAKARTA POST ============ */
-  /* Light = acuan TJP asli (putih, #E5E5E5, #6B6B6A, merah #dc2027).
-     Dark = turunan; #dc2027 gagal kontras di atas hitam, dinaikkan ke #e5484d. */
-  :root, [data-theme="dark"] {
-    --bg: #121212;
-    --surface: #1a1a1a;
-    --surface2: #222222;
-    --border: #2e2e2e;
-    --text: #e8e8e8;
-    --text2: #a3a3a3;
-    --accent: #e5484d;
-    --badge: #e5484d;
-    --green: #2e9e63;
-    --red: #e5484d;
-    --blue: #4a90d9;
-    --rule: #333333;
-  }
-  [data-theme="light"] {
-    --bg: #ffffff;
-    --surface: #ffffff;
-    --surface2: #f7f7f7;
-    --border: #e5e5e5;
-    --text: #000000;
-    --text2: #6b6b6a;
-    --accent: #dc2027;
-    --badge: #dd1e26;
-    --green: #1a7f4b;
-    --red: #dc2027;
-    --blue: #1565c0;
-    --rule: #e5e5e5;
-  }
-
-  --serif-stack, --sans-stack: lihat body/h. Fallback wajib supaya teks tetap
-  tampil kalau Google Fonts lambat/diblokir.
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Lato', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 100vh;
-    transition: background 0.25s, color 0.25s;
-  }
-
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-
-  .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-
-  /* ============ TOP BAR ============ */
-  .topbar {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 1.5rem;
-  }
-  .topbar .edition {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--text2); font-weight: 700;
-  }
-  .topbar .edition strong { color: var(--accent); font-weight: 900; }
-  .theme-toggle {
-    background: transparent; border: none;
-    color: var(--text); padding: 0.3rem 0.45rem;
-    font-size: 0.7rem; cursor: pointer; font-weight: 600;
-    border-radius: 3px; letter-spacing: 0.05em;
-    display: inline-flex; align-items: center; justify-content: center;
-    line-height: 0;
-  }
-  .theme-toggle:hover { color: var(--accent); }
-  .theme-toggle svg { width: 15px; height: 15px; display: block; }
-  .theme-toggle .icon-sun { display: none; }
-  .theme-toggle .icon-moon { display: block; }
-  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
-  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
-
-  /* ============ MASTHEAD ============ */
-  header.masthead { text-align: center; padding: 1.1rem 0 1.3rem; }
-  .masthead .kicker {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.63rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--accent); font-weight: 900; margin-bottom: 0.55rem;
-  }
-  .masthead h1 {
-    font-family: 'Lora', Georgia, 'Times New Roman', serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 700; letter-spacing: -0.01em; line-height: 1.08;
-    color: var(--text);
-  }
-  .masthead .window {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.76rem; color: var(--text2); margin-top: 0.5rem;
-    letter-spacing: 0.02em;
-  }
-  .masthead .window strong { color: var(--text); font-weight: 700; }
-  /* TJP pakai garis tipis tunggal, bukan tebal-tipis */
-  .rules { display: flex; align-items: center; gap: 0; margin-top: 1rem; }
-  .rules .thick { flex: 1; border-top: 1px solid var(--border); }
-  .rules .thin { flex: 0; border: none; }
-
-  /* ============ TICKER (live market) ============ */
-  .ticker {
-    display: flex; justify-content: space-between; align-items: center;
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    padding: 0.55rem 0.9rem; margin: 1.1rem 0;
-    background: var(--surface2);
-    font-family: 'Lato', sans-serif;
-    font-size: 0.78rem;
-    border-radius: 3px;
-  }
-  .ticker .item { display: flex; gap: 0.5rem; align-items: baseline; }
-  .ticker .label { color: var(--text2); font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase; font-weight: 700; }
-  .ticker .val { font-weight: 900; font-variant-numeric: tabular-nums; }
-  .ticker .chg.up { color: var(--green); }
-  .ticker .chg.down { color: var(--red); }
-  .ticker .updated { color: var(--text2); font-size: 0.62rem; }
-  .ticker.hidden { display: none !important; }
-  .lead.hidden { display: none !important; }
-  .ticker .refresh-btn {
-    background: transparent; border: none;
-    color: var(--text2); font-size: 0.9rem; line-height: 1;
-    padding: 0.3rem 0.4rem; cursor: pointer;
-    transition: color 0.15s, transform 0.3s;
-  }
-  .ticker .refresh-btn:hover { color: var(--text); transform: rotate(180deg); }
-  .ticker .refresh-btn:active { color: var(--accent); transform: rotate(360deg); }
-
-  /* ============ SLICERS ============ */
-  .slicers-row {
-    display: flex; flex-wrap: wrap; gap: 0.4rem;
-    margin: 1.25rem 0 1.6rem;
-  }
-  .slicer-btn {
-    background: transparent; border: 1px solid var(--border);
-    color: var(--text2);
-    font-family: 'Lato', sans-serif;
-    font-size: 0.71rem; font-weight: 700;
-    padding: 0.32rem 0.8rem; border-radius: 3px; cursor: pointer;
-    letter-spacing: 0.03em; text-transform: uppercase;
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
-  }
-  .slicer-btn .count { opacity: 0.6; margin-left: 0.25rem; font-size: 0.62rem; }
-  .slicer-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .slicer-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-  /* ============ LEAD STORY ============ */
-  .lead {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 1.35rem 0 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-  .lead .tag-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; }
-  .lead .tag {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.62rem; font-weight: 900; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #fff;
-    background: var(--badge); padding: 0.15rem 0.5rem; border-radius: 3px;
-  }
-  .lead .tag-row::after { content: ''; flex: 1; border-top: 1px solid var(--border); }
-  .lead h2 {
-    font-family: 'Lora', Georgia, 'Times New Roman', serif;
-    font-size: clamp(1.45rem, 3.4vw, 2.1rem);
-    font-weight: 700; line-height: 1.22; margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
-  }
-  .lead p {
-    font-family: 'Lato', sans-serif;
-    color: var(--text2); font-size: 0.94rem; max-width: 75ch; line-height: 1.55;
-  }
-  .lead .meta {
-    font-family: 'Lato', sans-serif;
-    margin-top: 0.75rem; font-size: 0.68rem; color: var(--text2);
-    display: flex; gap: 1rem;
-  }
-  .lead .meta .src { font-weight: 700; color: var(--text); }
-  .lead .meta .sent { font-weight: 700; }
-  .sent.up { color: var(--green); }
-  .sent.down { color: var(--red); }
-  .sent.neutral { color: var(--blue); }
-
-  /* ============ SECTION ============ */
-  /* TJP: label Lato 900 uppercase + garis tipis, bukan rules tebal */
-  .section {
-    margin: 2rem 0 0.8rem;
-    display: flex; align-items: center; gap: 0.75rem;
-    border-top: 1px solid var(--border); padding-top: 0.85rem;
-  }
-  .section h3 {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.85rem; font-weight: 900; white-space: nowrap;
-    text-transform: uppercase; letter-spacing: 0.08em;
-    color: var(--text);
-  }
-  .section h3::before {
-    content: ''; display: inline-block;
-    width: 4px; height: 0.85rem; background: var(--accent);
-    margin-right: 0.55rem; vertical-align: -1px;
-  }
-  .section .rule-thick { display: none; }
-  .section .rule-thin { flex: 1; border-top: 1px solid var(--border); }
-
-  /* ============ NEWS GRID ============ */
-  .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-  }
-  .news-card {
-    position: relative;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 1rem 1.05rem 0.9rem;
-    display: flex; flex-direction: column; gap: 0.4rem;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .news-card:hover { border-color: var(--accent); box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
-  .news-card.hidden { display: none !important; }
-  /* stripe sentimen dipindah ke atas kartu, tipis — TJP tidak pakai bar kiri */
-  .news-card .stripe { position: absolute; left: 0; right: 0; top: 0; height: 2px; bottom: auto; width: auto; }
-  .stripe-up { background: var(--green); }
-  .stripe-down { background: var(--red); }
-  .stripe-neutral { background: var(--blue); }
-
-  /* badge kategori CSS-only dari data-cat — HTML kartu tidak perlu diubah */
-  .news-card::before {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.58rem; font-weight: 900; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #fff; background: var(--badge);
-    padding: 0.12rem 0.45rem; border-radius: 3px;
-    align-self: flex-start; line-height: 1.5;
-  }
-  .news-card[data-cat="ai"]::before       { content: 'AI'; }
-  .news-card[data-cat="earnings"]::before { content: 'Earnings'; }
-  .news-card[data-cat="chip"]::before     { content: 'Chip'; }
-  .news-card[data-cat="gadget"]::before   { content: 'Gadget'; }
-  .news-card[data-cat="quantum"]::before  { content: 'Quantum'; }
-  .news-card[data-cat="policy"]::before   { content: 'Policy'; }
-  .news-card[data-cat="other"]::before    { content: 'Lain-lain'; }
-
-  .news-card .tag {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--text2);
-  }
-  .news-card .tag::after { content: ''; }
-  .news-card h4 {
-    font-family: 'Lora', Georgia, 'Times New Roman', serif;
-    font-size: 1rem; font-weight: 600; line-height: 1.34;
-    color: var(--text); letter-spacing: -0.005em;
-  }
-  .news-card p {
-    font-family: 'Lato', sans-serif;
-    color: var(--text2); font-size: 0.79rem; line-height: 1.55; flex: 1;
-  }
-  .news-card .foot {
-    font-family: 'Lato', sans-serif;
-    display: flex; justify-content: space-between; align-items: center;
-    margin-top: 0.55rem; padding-top: 0.55rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.64rem; color: var(--text2);
-  }
-  .news-card .foot .read-more { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
-  .news-card .foot .read-more::after { content: ' →'; }
-
-  footer {
-    font-family: 'Lato', sans-serif;
-    margin-top: 3rem; padding-top: 1rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.68rem; color: var(--text2);
-    text-align: center; letter-spacing: 0.04em;
-  }
-
-  /* ============ BACKGROUND TECH GRAPHIC ============ */
-  /* TJP bersih tanpa tekstur — dimatikan, class tetap ada agar JS tidak error */
-  .bg-layer { display: none; }
-
-  /* ============ MARKET TICKER (minimalis) ============ */
-  .ticker-section { margin: 1.1rem 0 1.4rem; }
-  .ticker-label {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--text2); margin-right: 0.5rem; white-space: nowrap; font-weight: 700;
-  }
-  .ticker-section .ticker {
-    display: flex; flex-wrap: wrap; gap: 0 1.4rem;
-    border: none; border-top: 1px solid var(--border);
-    background: transparent; padding: 0.55rem 0 0;
-    margin: 0.5rem 0 0; font-size: 0.75rem;
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
-    white-space: nowrap; border-radius: 0;
-  }
-  .ticker-item {
-    display: flex; align-items: baseline; gap: 0.4rem;
-    padding: 0.15rem 0;
-  }
-  .ticker-item .sym {
-    font-weight: 900; letter-spacing: 0.03em;
-    font-variant-numeric: tabular-nums; color: var(--text2);
-  }
-  .ticker-item .change {
-    font-size: 0.72rem; font-weight: 700;
-    font-variant-numeric: tabular-nums;
-  }
-  .ticker-item .change.up { color: var(--green); }
-  .ticker-item .change.down { color: var(--red); }
-  .ticker-item .change.up::before { content: '▲ '; font-size: 0.62rem; }
-  .ticker-item .change.down::before { content: '▼ '; font-size: 0.62rem; }
-
-  /* ============ STICKY SLICER BAR ============ */
-  .slicers-row.sticky {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--bg); padding: 0.5rem 0;
-    margin: 0 -0.5rem 1rem; padding-left: 0.5rem; padding-right: 0.5rem;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
-  }
-  .slicers-row.sticky::-webkit-scrollbar { height: 3px; }
-  .slicers-row.sticky::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-  /* ============ TOP 5 SUMMARY ============ */
-  .top5 {
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    background: var(--surface2);
-    padding: 0.9rem 1.1rem;
-    margin-bottom: 1.5rem;
-    border-radius: 3px;
-  }
-  .top5 h3 {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.72rem; font-weight: 900; margin-bottom: 0.5rem;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text);
-  }
-  .top5 ol { list-style: none; counter-reset: top5; padding: 0; }
-  .top5 li {
-    counter-increment: top5;
-    font-family: 'Lora', Georgia, serif;
-    font-size: 0.82rem; line-height: 1.5;
-    padding: 0.2rem 0 0.2rem 1.6rem;
-    position: relative;
-  }
-  .top5 li::before {
-    content: counter(top5);
-    position: absolute; left: 0; top: 0.2rem;
-    font-family: 'Lato', sans-serif;
-    font-weight: 900; color: var(--accent); font-size: 0.72rem;
-  }
-  .top5 li a { color: var(--text); }
-  .top5 li a:hover { color: var(--accent); }
-  .top5 li .cat-tag {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.58rem; font-weight: 900; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--text2); margin-left: 0.4rem;
-  }
-
-  /* ============ CARD DATE PROMINENCE ============ */
-  .news-card .date-main {
-    font-weight: 700; color: var(--text); font-size: 0.68rem;
-  }
-
-  /* ============ RESPONSIVE ============ */
-  @media (max-width: 768px) {
-    .container { padding: 1rem 0.8rem 3rem; }
-    .topbar { padding-bottom: 0.5rem; margin-bottom: 1.1rem; }
-    .masthead { padding: 0.6rem 0 0.9rem; }
-    .masthead h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
-    .masthead .kicker { font-size: 0.58rem; }
-    .masthead .window { font-size: 0.72rem; }
-    .lead h2 { font-size: 1.3rem; }
-    .lead p { font-size: 0.9rem; line-height: 1.5; }
-    .lead .meta { flex-wrap: wrap; gap: 0.4rem 0.8rem; }
-    .ticker .refresh-btn { align-self: center; margin: 0 0 0 auto; }
-    .ticker-section .ticker { gap: 0 1rem; }
-    .news-grid { grid-template-columns: 1fr; }
-    .slicers-row { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .slicers-row.sticky { margin: 0 -0.8rem 0.9rem; padding-left: 0.8rem; padding-right: 0.8rem; }
-    .section h3 { font-size: 0.78rem; }
-    .top5 { padding: 0.8rem 0.9rem; margin-bottom: 1.1rem; }
-    .top5 h3 { font-size: 0.68rem; }
-    .top5 li { font-size: 0.84rem; }
-  }
-  @media (max-width: 480px) {
-    .container { padding: 0.7rem 0.6rem 3rem; }
-    .topbar { flex-direction: column; gap: 0.4rem; align-items: flex-start; }
-    .masthead { padding: 0.8rem 0 1rem; }
-    .masthead h1 { font-size: 1.6rem; }
-    .masthead .window { font-size: 0.7rem; }
-    .lead h2 { font-size: 1.15rem; }
-    .lead p { font-size: 0.85rem; }
-    .lead .meta { flex-direction: column; gap: 0.2rem; }
-    .ticker .item { font-size: 0.7rem; }
-    .ticker { flex-wrap: wrap; }
-    .ticker .item { display: flex; flex-direction: column; align-items: flex-start; gap: 0.15rem; }
-    .ticker .item .chg { font-size: 0.65rem; white-space: nowrap; }
-    .ticker .refresh-btn { align-self: center; margin: 0 0 0 auto; }
-    .ticker-section .ticker { font-size: 0.7rem; gap: 0 0.7rem; }
-    .ticker-item { gap: 0.3rem; }
-    .ticker-item .change { font-size: 0.66rem; }
-    .news-card { padding: 0.85rem 0.9rem 0.75rem; }
-    .news-card h4 { font-size: 0.92rem; }
-    .top5 li { display: flex; flex-wrap: wrap; gap: 0.3rem 0.5rem; }
-    .top5 .cat-tag { margin-left: auto; }
-    .slicers-row.sticky { margin: 0 -0.6rem 0.8rem; padding-left: 0.6rem; padding-right: 0.6rem; }
-    .slicer-btn { padding: 0.3rem 0.65rem; font-size: 0.68rem; white-space: nowrap; }
-    footer { font-size: 0.62rem; }
-  }
-
-  /* ============ PRINT ============ */
-  @media print {
-    .bg-layer, .theme-toggle, .refresh-btn, .slicers-row, .ticker-section { display: none !important; }
-    body { background: #fff !important; color: #000 !important; }
-    .container { max-width: 100% !important; padding: 0 !important; }
-    .masthead h1, .lead h2, .news-card h4, .section h3 { color: #000 !important; }
-    .news-card { border: 1px solid #ccc !important; break-inside: avoid; }
-    .lead { border-top: 1px solid #000 !important; }
-    .stripe { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-    .news-card::before { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-    a { color: #000 !important; text-decoration: none !important; }
-    .top5 { break-inside: avoid; }
-  }
-
-"""
-
-# baris komentar bebas di atas bukan CSS valid — buang
-CSS = CSS.replace(
-    "  --serif-stack, --sans-stack: lihat body/h. Fallback wajib supaya teks tetap\n"
-    "  tampil kalau Google Fonts lambat/diblokir.\n\n", "")
-
 # ---------------------------------------------------------------- rakit
 m = re.search(r"<style>.*?</style>", html, re.S)
 if not m:
     sys.exit("FATAL: blok <style> tidak ditemukan di index.html")
-out = html[:m.start()] + "<style>\n" + CSS + "</style>" + html[m.end():]
+out = html[:m.start()] + "<style>" + css + "</style>" + html[m.end():]
 
-# sisipkan font sebelum <style>
-out = out.replace("<style>\n" + CSS, FONTS + "<style>\n" + CSS, 1)
+# sisipkan font sekali saja (idempoten)
+if "fonts.googleapis" not in out:
+    out = out.replace("<style>", FONTS + "<style>", 1)
 
 # penanda preview
-out = out.replace("<title>", "<title>[PREVIEW TJP] ", 1)
+if "[PREVIEW TJP]" not in out:
+    out = out.replace("<title>", "<title>[PREVIEW TJP] ", 1)
 out = out.replace('data-theme="dark"', 'data-theme="light"', 1)
 
-# favicon ikut palet TJP (aksen lama #e0483e, krem #f0ece4, Georgia)
+# favicon ikut palet TJP
 out = (out.replace("%23e0483e", "%23dc2027")
           .replace("%23f0ece4", "%23ffffff")
           .replace("%23121212'/%3E%3Crect", "%23000000'/%3E%3Crect")
@@ -481,13 +50,11 @@ out = out.replace('<meta name="theme-color" content="#121212">',
 OUT.write_text(out, encoding="utf-8")
 
 # ---------------------------------------------------------------- lapor
-cards = len(re.findall(r'class="news-card', out))
-print(f"tulis    : {OUT.name}")
-print(f"ukuran   : {len(out):,} bytes (index.html: {len(html):,})")
-print(f"kartu    : {cards}")
-print(f"fonts    : {'OK' if 'fonts.googleapis' in out else 'HILANG'}")
-print(f"Lora     : {out.count('Lora')} rujukan")
-print(f"Lato     : {out.count('Lato')} rujukan")
-print(f"badge    : {len(re.findall(chr(39) + r'; }', CSS))} kategori")
-has_windur = 'id="win-dur"' in out
-print(f"win-dur  : {'OK' if has_windur else 'HILANG'}")
+n = lambda pat: len(re.findall(pat, out))
+print(f"sumber CSS : {CSS_FILE.name} ({len(css):,} bytes)")
+print(f"tulis      : {OUT.name} ({len(out):,} bytes)")
+print(f"kartu      : {n(r'class=.news-card')}")
+print(f"fonts      : {'OK' if 'fonts.googleapis' in out else 'HILANG'}")
+print(f"Lora/Lato  : {out.count('Lora')}/{out.count('Lato')} rujukan")
+print(f"badge      : {n(r'.news-card.data-cat=')} aturan")
+print(f"span.source: {out.count(chr(34) + 'source' + chr(34))}")

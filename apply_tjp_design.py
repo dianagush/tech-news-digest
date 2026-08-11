@@ -1,4 +1,7 @@
-"""Terapkan CSS desain TJP dari design-preview.html ke index.html.
+"""Terapkan CSS desain TJP ke index.html.
+
+Sumber tunggal CSS: tjp-design.css (bukan design-preview.html, bukan string
+di dalam script — dulu ada 3 salinan yang bisa saling basi).
 
 Hanya menyentuh: blok <style>, <link> Google Fonts, palet favicon.
 Struktur HTML, kartu berita, JS (LIVE_IHSG/LIVE_USDIDR, slicer, theme,
@@ -9,20 +12,14 @@ Default tema TETAP dark (perilaku lama) — desain jalan di dua tema.
 
 Jalankan: python apply_tjp_design.py
 """
-import re, pathlib, shutil, sys
+import re, pathlib, sys
 
 REPO = pathlib.Path(__file__).resolve().parent
-PREVIEW, TARGET = REPO / "design-preview.html", REPO / "index.html"
+CSS_FILE, TARGET = REPO / "tjp-design.css", REPO / "index.html"
 
-preview = PREVIEW.read_text(encoding="utf-8")
+css = CSS_FILE.read_text(encoding="utf-8")
 target = TARGET.read_text(encoding="utf-8")
 before = target
-
-# ---------- 1. ambil CSS + blok font dari preview ----------
-m_css = re.search(r"<style>(.*?)</style>", preview, re.S)
-if not m_css:
-    sys.exit("FATAL: <style> tidak ditemukan di design-preview.html")
-css = m_css.group(1)
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'

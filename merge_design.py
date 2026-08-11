@@ -8,14 +8,14 @@ daily background).
 import re, sys
 
 MAIN = r"C:\Users\DianAgusHermawan\OneDrive - PLN\Hermes\main"
-PREVIEW = r"C:\Users\DianAgusHermawan\OneDrive - PLN\Hermes\main\design-preview.html"
+CSS_FILE = r"C:\Users\DianAgusHermawan\OneDrive - PLN\Hermes\main\tjp-design.css"
 
 old_html = open(f"{MAIN}\\index.html", encoding="utf-8").read()
-preview = open(PREVIEW, encoding="utf-8").read()
 
-# ---------- 1. extract CSS dari preview ----------
-m_style = re.search(r"<style>(.*?)</style>", preview, re.S)
-css = m_style.group(1)
+# ---------- 1. CSS dari sumber tunggal ----------
+# dulu diambil dari design-preview.html; sekarang tjp-design.css supaya tidak
+# ada salinan CSS yang bisa saling basi.
+css = open(CSS_FILE, encoding="utf-8").read()
 
 # ---------- 2. extract data dari index.html asli ----------
 def extract_cards(section_html):
@@ -28,7 +28,20 @@ def extract_cards(section_html):
         tag = re.search(r'class="tag[^"]*">([^<]+)</span>', inner)
         title = re.search(r"<h[34]>(.*?)</h[34]>", inner, re.S)
         desc = re.search(r"<p>(.*?)</p>", inner, re.S)
-        src = re.search(r'<span class="source">(.*?)</span>', inner, re.S)
+        # footer: bentuk lengkap dibungkus <span> luar —
+        #   <span><span class="date-main">07 Agu</span> · <span class="source">TechCrunch</span></span>
+        # regex lama hanya mencocokkan <span class="source"> polos, jadi tanggal+outlet
+        # hilang tiap rebuild (regresi 76982f8). Rekonstruksi dari kedua bagian.
+        date_m = re.search(r'<span class="date-main">(.*?)</span>', inner, re.S)
+        src_m = re.search(r'<span class="source">(.*?)</span>', inner, re.S)
+        if date_m and src_m:
+            source = f"{date_m.group(1).strip()} · {src_m.group(1).strip()}"
+        elif src_m:
+            source = src_m.group(1).strip()
+        else:
+            # fallback: teks polos di <span> pertama dalam .foot (mis. "07 Agu · TechCrunch")
+            foot_m = re.search(r'<div class="foot"><span>(.*?)</span>\s*<a', inner, re.S)
+            source = re.sub(r"<[^>]+>", "", foot_m.group(1)).strip() if foot_m else ""
         link = re.search(r'<a class="read-more" href="([^"]+)"[^>]*>', inner)
         cards.append({
             "featured": bool(featured),
@@ -37,7 +50,7 @@ def extract_cards(section_html):
             "tag": tag.group(1) if tag else cat,
             "title": title.group(1) if title else "",
             "desc": desc.group(1) if desc else "",
-            "source": src.group(1) if src else "",
+            "source": source,
             "href": link.group(1) if link else "#",
         })
     return cards
@@ -153,9 +166,12 @@ def card_html(c, idx=None):
     src = c["source"]
     if "·" in src:
         tgl, outlet = src.split("·", 1)
-        foot_left = f'<span class="date-main">{tgl.strip()}</span> · {outlet.strip()}'
+        foot_left = (f'<span class="date-main">{tgl.strip()}</span>'
+                     f' · <span class="source">{outlet.strip()}</span>')
+    elif src:
+        foot_left = f'<span class="source">{src}</span>'
     else:
-        foot_left = src
+        foot_left = ""
     return f'''    <div class="news-card{feat}"{anchor} data-cat="{c['cat']}">
       <div class="stripe {c['stripe']}"></div>
       <span class="tag">{c['tag']}</span>
