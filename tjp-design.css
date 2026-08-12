@@ -55,16 +55,10 @@
     border-bottom: 1px solid var(--border);
     margin-bottom: 1.5rem;
   }
-  .topbar .edition {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--text2); font-weight: 700;
-  }
-  .topbar .edition strong { color: var(--accent); font-weight: 900; }
-
   /* NAV antar halaman (Tech | Sport) — dipakai kedua halaman digest.
      SATU-SATUNYA definisi; sport-design.css dan apply_sport_page.py
-     tidak boleh memuat salinan sendiri (audit P2 2026-08-11). */
+     tidak boleh memuat salinan sendiri (audit P2 2026-08-11).
+     (.topbar .edition dihapus 2026-08-12 — elemen diganti nav.) */
   .site-nav { display: flex; gap: 1.1rem; align-items: center; }
   .site-nav a {
     font-family: 'Lato', sans-serif;
