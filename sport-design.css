@@ -15,16 +15,7 @@
     --badge: #0f7a3d;
   }
 
-  /* ---- NAV ANTAR HALAMAN ---- */
-  .site-nav { display: flex; gap: 1.1rem; align-items: center; }
-  .site-nav a {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    font-weight: 700; color: var(--text2);
-    padding-bottom: 0.2rem; border-bottom: 2px solid transparent;
-  }
-  .site-nav a:hover { color: var(--text); text-decoration: none; }
-  .site-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  /* ---- NAV antar halaman ada di tjp-design.css (base bersama) ---- */
 
   /* ---- BADGE KATEGORI KARTU (CSS-only, dari data-cat) ---- */
   .news-card[data-cat="sepakbola"]::before  { content: 'Sepakbola'; }
@@ -157,8 +148,6 @@
     .score-status { grid-column: 1 / -1; text-align: left; }
     .score-single { grid-template-columns: 1fr; }
     .score-single .venue { text-align: left; }
-    .site-nav { gap: 0.8rem; }
-    .site-nav a { font-size: 0.6rem; letter-spacing: 0.1em; }
   }
   @media (max-width: 480px) {
     .score-team .nm { font-size: 0.78rem; }
@@ -168,5 +157,5 @@
   }
 
   @media print {
-    .site-nav, .sport-slicers { display: none; }
+    .sport-slicers { display: none; }
   }

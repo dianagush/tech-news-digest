@@ -82,6 +82,27 @@
     color: var(--text2); font-weight: 700;
   }
   .topbar .edition strong { color: var(--accent); font-weight: 900; }
+
+  /* NAV antar halaman (Tech | Sport) — dipakai kedua halaman digest.
+     SATU-SATUNYA definisi; sport-design.css dan apply_sport_page.py
+     tidak boleh memuat salinan sendiri (audit P2 2026-08-11). */
+  .site-nav { display: flex; gap: 1.1rem; align-items: center; }
+  .site-nav a {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 700; color: var(--text2);
+    padding-bottom: 0.2rem; border-bottom: 2px solid transparent;
+  }
+  .site-nav a:hover { color: var(--text); text-decoration: none; }
+  .site-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  @media (max-width: 768px) {
+    .site-nav { gap: 0.8rem; }
+    .site-nav a { font-size: 0.6rem; letter-spacing: 0.1em; }
+  }
+  @media print {
+    .site-nav { display: none; }
+  }
+
   .theme-toggle {
     background: transparent; border: none;
     color: var(--text); padding: 0.3rem 0.45rem;
@@ -463,16 +484,7 @@
     --badge: #0f7a3d;
   }
 
-  /* ---- NAV ANTAR HALAMAN ---- */
-  .site-nav { display: flex; gap: 1.1rem; align-items: center; }
-  .site-nav a {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    font-weight: 700; color: var(--text2);
-    padding-bottom: 0.2rem; border-bottom: 2px solid transparent;
-  }
-  .site-nav a:hover { color: var(--text); text-decoration: none; }
-  .site-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  /* ---- NAV antar halaman ada di tjp-design.css (base bersama) ---- */
 
   /* ---- BADGE KATEGORI KARTU (CSS-only, dari data-cat) ---- */
   .news-card[data-cat="sepakbola"]::before  { content: 'Sepakbola'; }
@@ -605,8 +617,6 @@
     .score-status { grid-column: 1 / -1; text-align: left; }
     .score-single { grid-template-columns: 1fr; }
     .score-single .venue { text-align: left; }
-    .site-nav { gap: 0.8rem; }
-    .site-nav a { font-size: 0.6rem; letter-spacing: 0.1em; }
   }
   @media (max-width: 480px) {
     .score-team .nm { font-size: 0.78rem; }
@@ -616,7 +626,7 @@
   }
 
   @media print {
-    .site-nav, .sport-slicers { display: none; }
+    .sport-slicers { display: none; }
   }
 </style>
 </head>
@@ -662,12 +672,14 @@
 
   <!-- NEWS SLICERS -->
   <div class="slicers-row sticky" id="categorySlicers" role="group" aria-label="Filter kategori berita">
-    <button class="slicer-btn active" data-cat="all">Semua <span class="count">(8)</span></button>
-    <button class="slicer-btn" data-cat="sepakbola">Sepakbola <span class="count">(4)</span></button>
-    <button class="slicer-btn" data-cat="motorsport">Motorsport <span class="count">(1)</span></button>
-    <button class="slicer-btn" data-cat="basket">Basket <span class="count">(1)</span></button>
+    <button class="slicer-btn active" data-cat="all">Semua <span class="count">(20)</span></button>
+    <button class="slicer-btn" data-cat="sepakbola">Sepakbola <span class="count">(11)</span></button>
+    <button class="slicer-btn" data-cat="motorsport">Motorsport <span class="count">(2)</span></button>
+    <button class="slicer-btn" data-cat="basket">Basket <span class="count">(2)</span></button>
     <button class="slicer-btn" data-cat="tenis">Tenis <span class="count">(1)</span></button>
     <button class="slicer-btn" data-cat="badminton">Bulutangkis <span class="count">(1)</span></button>
+    <button class="slicer-btn" data-cat="mma">MMA <span class="count">(1)</span></button>
+    <button class="slicer-btn" data-cat="lainnya">Lain-lain <span class="count">(2)</span></button>
   </div>
 
   <div id="news-container">
@@ -675,80 +687,174 @@
     <div class="section"><div class="rule-thick"></div><h3>Sepakbola</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
     <div class="news-card" id="card-1" data-cat="sepakbola">
-      <div class="stripe stripe-up"></div>
-      <span class="tag">Persib</span>
-      <h4>Persib Tahan Imbang Bali United di Kandang</h4>
-      <p>Laga pekan ketiga Liga 1 berakhir 1-1 setelah gol penyeimbang di menit akhir. Persib tetap di puncak klasemen sementara dengan selisih dua poin.</p>
-      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Bola.net</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Transfer</span>
+      <h4>Kapan Bursa Transfer Musim Panas 2026 Tutup? Ini Jadwal Liga Top Eropa</h4>
+      <p>Premier League dan La Liga memutuskan menutup jendela transfer pada Selasa 2 September 2026 pukul 05.00 WIB, sementara sejumlah liga lain memilih tenggat lebih awal di pekan yang sama.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">Kontan</span></span><a class="read-more" href="https://internasional.kontan.co.id/news/kapan-bursa-transfer-musim-panas-2026-tutup-ini-jadwal-liga-top-eropa" target="_blank" rel="noopener">Baca</a></div>
     </div>
     <div class="news-card" id="card-2" data-cat="sepakbola">
-      <div class="stripe stripe-flat"></div>
-      <span class="tag">Timnas</span>
-      <h4>Timnas Indonesia Panggil 26 Pemain untuk Kualifikasi</h4>
-      <p>Pelatih mengumumkan skuad untuk dua laga kualifikasi bulan depan, termasuk tiga pemain debutan dari klub Liga 1.</p>
-      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Detik Sport</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+      <div class="stripe stripe-up"></div>
+      <span class="tag">Transfer</span>
+      <h4>Man City Rampungkan Transfer Besar-besaran Senilai EUR 100 Juta</h4>
+      <p>Tim asuhan Pep Guardiola mengunci satu rekrutan mahal di pertengahan Agustus, menambah belanja Premier League yang musim ini kembali memecahkan rekor pengeluaran bursa transfer.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">Vietnam.vn</span></span><a class="read-more" href="https://www.vietnam.vn/id/chuyen-nhuong-mua-he-suc-manh-khong-gioi-han-cua-premier-league" target="_blank" rel="noopener">Baca</a></div>
     </div>
     <div class="news-card" id="card-3" data-cat="sepakbola">
-      <div class="stripe stripe-flat"></div>
-      <span class="tag">Pramusim</span>
-      <h4>Juventus Jamu Palermo di Laga Uji Coba Terakhir</h4>
-      <p>Pertandingan persahabatan menjadi gladi resik sebelum Serie A bergulir, dengan dua rekrutan anyar diperkirakan tampil sejak menit pertama.</p>
-      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">Football Italia</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+      <div class="stripe stripe-up"></div>
+      <span class="tag">Transfer</span>
+      <h4>10 Transfer Besar yang Sudah Terjadi di La Liga Awal Musim 2026/2027</h4>
+      <p>Marc Cucurella ke Real Madrid, Kang-in Lee ke Atletico Madrid, dan Anthony menjadi bagian dari daftar pembelian terbesar La Liga menjelang musim baru.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">Bola.net</span></span><a class="read-more" href="https://www.bola.net/spanyol/10-transfer-besar-yang-sudah-terjadi-di-la-liga-awal-musim-2026-2027-dc9ee6.html" target="_blank" rel="noopener">Baca</a></div>
     </div>
     <div class="news-card" id="card-4" data-cat="sepakbola">
       <div class="stripe stripe-up"></div>
       <span class="tag">Transfer</span>
-      <h4>Bursa Transfer Eropa Tembus Rekor Musim Panas</h4>
-      <p>Total belanja klub lima liga top melewati angka musim lalu sebulan sebelum jendela transfer ditutup.</p>
-      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Sky Sports</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+      <h4>Real Madrid Genapkan Lini Belakang: Cucurella, Konate, dan Dumfries</h4>
+      <p>Los Blancos memperkuat pertahanan dengan mendatangkan Marc Cucurella senilai 63 juta dolar AS, plus Ibrahima Konate dan Denzel Dumfries untuk musim 2026/2027.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">PDIPerjuanganBali</span></span><a class="read-more" href="https://www.pdiperjuanganbali.id/jadwal-liga-eropa-musim-2026-2027" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-5" data-cat="sepakbola">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Transfer</span>
+      <h4>Morgan Rogers ke Chelsea — Masuk Daftar 15 Transfer Termahal Musim Ini</h4>
+      <p>Bek sayap asal Inggris itu menjadi salah satu nama dalam daftar pembelian termahal menjelang bergulirnya liga-liga top Eropa akhir Agustus.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">Kompas TV</span></span><a class="read-more" href="https://www.kompas.tv/olahraga/681902/kapan-liga-liga-sepak-bola-top-eropa-akan-kembali-bergulir-simak-jadwalnya" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-6" data-cat="sepakbola">
+      <div class="stripe stripe-up"></div>
+      <span class="tag">Timnas</span>
+      <h4>Erick Thohir Beber Target Timnas di FIFA ASEAN Cup 2026</h4>
+      <p>Ketua Umum PSSI menyebut semua pemain terbaik Indonesia bisa hadir di turnamen yang digelar di dalam negeri, dan menargetkan hasil terbaik di hadapan pendukung sendiri.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Kompas TV</span></span><a class="read-more" href="https://www.kompas.tv/olahraga/684866/erick-thohir-beber-target-timnas-di-fifa-asean-cup-2026-semua-pemain-terbaik-indonesia-bisa-hadir" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-7" data-cat="sepakbola">
+      <div class="stripe stripe-up"></div>
+      <span class="tag">Liga 1</span>
+      <h4>Persib Bandung Bungkam Persija Jakarta 2-1, Kukuh di Puncak Klasemen</h4>
+      <p>Persija sempat unggul lewat gol Alaaeddine Ajaraie, tetapi Persib berbalik menang. Hasil ini membuat Maung Bandung semakin kukuh di puncak klasemen dengan koleksi 75 poin.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Antara</span></span><a class="read-more" href="https://kupang.antaranews.com/berita/189435/super-league-2026--persib-bandung-bungkam-persija-jakarta-2-1-kukuh-di-puncak-klasemen" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-8" data-cat="sepakbola">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Liga 1</span>
+      <h4>Klasemen Super League: Persib 72 Poin, Borneo dan Persija Membuntuti</h4>
+      <p>Persib memimpin dengan 72 poin, disusul Borneo 69 dan Persija 65. Malut United dan Persebaya melengkapi lima besar setelah pekan pertengahan musim.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Viva</span></span><a class="read-more" href="https://www.viva.co.id/bola/1896405-klasemen-super-league-usai-persib-dan-persija-mengganas" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-9" data-cat="sepakbola">
+      <div class="stripe stripe-up"></div>
+      <span class="tag">Timnas</span>
+      <h4>Catat! Timnas Indonesia Bakal Hadapi Tim Peserta Piala Dunia 2026 di FIFA Matchday November</h4>
+      <p>Setiap tim nasional berpeluang memainkan dua pertandingan di jendela November; Indonesia dijadwalkan menghadapi lawan berstatus peserta Piala Dunia 2026.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">Viva</span></span><a class="read-more" href="https://www.viva.co.id/bola/1920497-catat-timnas-indonesia-bakal-hadapi-tim-peserta-piala-dunia-2026-pada-fifa-matchday-november" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-10" data-cat="sepakbola">
+      <div class="stripe stripe-up"></div>
+      <span class="tag">Timnas</span>
+      <h4>FIFA ASEAN Cup 2026 Digelar di Indonesia, Erick Thohir Sebut Momentum Bersejarah</h4>
+      <p>Pemerintah memberikan dukungan penuh terhadap persiapan Indonesia menjadi tuan rumah FIFA ASEAN Cup 2026 yang disebut sebagai momentum bersejarah bagi sepak bola nasional.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">RRI</span></span><a class="read-more" href="https://rri.co.id/sumenep/sepak-bola/2642127/fifa-asean-2026-digelar-di-indonesia-erick-thohir-sebut-momentum-bersejarah" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-11" data-cat="sepakbola">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Liga Eropa</span>
+      <h4>Jadwal Premier League dan La Liga 2026-2027 Resmi Dirilis</h4>
+      <p>Kedua liga mengumumkan kalender musim baru. La Liga tercatat sebagai liga dengan total pengeluaran transfer besar awal musim, mencapai 454 juta euro.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">PDIPerjuanganBali</span></span><a class="read-more" href="https://www.pdiperjuanganbali.id/jadwal-liga-eropa-musim-2026-2027" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="motorsport">
     <div class="section"><div class="rule-thick"></div><h3>Motorsport</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card" id="card-5" data-cat="motorsport">
+    <div class="news-card" id="card-12" data-cat="motorsport">
       <div class="stripe stripe-flat"></div>
       <span class="tag">Formula 1</span>
-      <h4>Dutch GP Jadi Penentu Perebutan Gelar</h4>
-      <p>Selisih poin di klasemen menyempit menjelang balapan kandang tim papan atas.</p>
-      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Autosport</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+      <h4>Dutch GP 2026: Tiket Akhir Pekan Habis, Zandvoort Pamit dari Kalender</h4>
+      <p>Penyelenggara mengumumkan tiket Sabtu dan Minggu ludes terjual untuk edisi terakhir Dutch Grand Prix di Zandvoort (21-23 Agustus) sebelum sirkuit pamit dari kalender F1.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">DutchGP</span></span><a class="read-more" href="https://www.dutchgp.com/en/2026-sold-out/" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-13" data-cat="motorsport">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Formula 1</span>
+      <h4>Verstappen Angkat Bicara Jelang GP Kandang Terakhirnya di Zandvoort</h4>
+      <p>Max Verstappen menyampaikan penilaian jujur tentang sirkuit Zandvoort menjelang kemungkinan balapan kandang terakhirnya, didukung pujian senada dari Lando Norris dan Kimi Antonelli.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Yahoo Sports</span></span><a class="read-more" href="https://sports.yahoo.com/articles/max-verstappen-delivers-honest-verdict-152000590.html" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="basket">
     <div class="section"><div class="rule-thick"></div><h3>Basket</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card" id="card-6" data-cat="basket">
+    <div class="news-card" id="card-14" data-cat="basket">
       <div class="stripe stripe-flat"></div>
       <span class="tag">NBA</span>
-      <h4>Jadwal NBA 2026-27 Dirilis, Musim Dibuka Awal Oktober</h4>
-      <p>Liga mengumumkan kalender lengkap; laga pembuka mempertemukan finalis musim lalu.</p>
-      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">ESPN</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+      <h4>NBA Rilis Jadwal 2026-27: Opening Day 20 Oktober</h4>
+      <p>Liga mengumumkan kalender musim baru lengkap dengan 10 tanggal kunci, termasuk kembalinya sejumlah bintang dan rivalitas lama di pekan pembuka. Laga perdana tip-off 20 Oktober.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">CBS Sports</span></span><a class="read-more" href="https://www.cbssports.com/nba/news/nba-2026-27-schedule-release-key-dates-knicks-76ers-spurs-thunder-lebron-james-giannis-antetokounmpo/" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-15" data-cat="basket">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">NBA</span>
+      <h4>Jaylen Brown Kembali ke Boston — Sekarang Berseragam 76ers</h4>
+      <p>Celtics menukar mantan Finals MVP itu dengan Paul George dan pilihan draft. Pertemuan pertamanya di TD Garden dijadwalkan pada musim reguler 2026-27 dan dijamin emosional.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">CBS Sports</span></span><a class="read-more" href="https://www.cbssports.com/nba/news/jaylen-brown-76ers-celtics-jayson-tatum-joel-embiid-lebron-james/" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="tenis">
     <div class="section"><div class="rule-thick"></div><h3>Tenis</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card" id="card-7" data-cat="tenis">
+    <div class="news-card" id="card-16" data-cat="tenis">
       <div class="stripe stripe-flat"></div>
       <span class="tag">ATP</span>
-      <h4>Cincinnati Open Dimulai, Unggulan Teratas Dapat Bye</h4>
-      <p>Turnamen Masters 1000 terakhir sebelum US Open menghadirkan hampir seluruh pemain sepuluh besar dunia.</p>
-      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">ATP Tour</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+      <h4>Cincinnati Open Bergulir sebagai Masters Terakhir Jelang US Open</h4>
+      <p>Turnamen Masters 1000 di Ohio menjadi ajang pemanasan terakhir sebelum US Open, dengan hampir seluruh pemain sepuluh besar dunia dijadwalkan tampil.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">ESPN</span></span><a class="read-more" href="https://www.espn.com/tennis/" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
     <section data-section="badminton">
     <div class="section"><div class="rule-thick"></div><h3>Bulutangkis</h3><div class="rule-thin"></div></div>
     <div class="news-grid">
-    <div class="news-card" id="card-8" data-cat="badminton">
+    <div class="news-card" id="card-17" data-cat="badminton">
       <div class="stripe stripe-up"></div>
       <span class="tag">BWF</span>
-      <h4>Indonesia Kirim 12 Wakil ke Kejuaraan Dunia</h4>
-      <p>Skuad terdiri dari lima sektor dengan tunggal putra sebagai andalan medali.</p>
-      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Antara</span></span><a class="read-more" href="#" target="_blank" rel="noopener">Baca</a></div>
+      <h4>8 dari 11 Wakil Indonesia Jadi Unggulan Kejuaraan Dunia BWF 2026</h4>
+      <p>Kejuaraan Dunia BWF 2026 berlangsung di New Delhi, India, 17-23 Agustus. Delapan wakil Indonesia berstatus unggulan, termasuk Jonatan Christie di tunggal putra.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">GenPI</span></span><a class="read-more" href="https://www.genpi.co/sport/286079/8-wakil-indonesia-jadi-unggulan-di-kejuaraan-dunia-bwf-2026-ada-jonatan-christie" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    </div>
+    </section>
+    <section data-section="mma">
+    <div class="section"><div class="rule-thick"></div><h3>MMA</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+    <div class="news-card" id="card-18" data-cat="mma">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">UFC</span>
+      <h4>UFC Contender Series Musim ke-10 Dibuka Pekan Ini</h4>
+      <p>Seri pencarian bakat UFC memulai musim baru dengan kartu perdana yang mempertemukan petarung kelas welter memperebutkan kontrak promosi.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">ESPN</span></span><a class="read-more" href="https://www.espn.com/mma/" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    </div>
+    </section>
+    <section data-section="lainnya">
+    <div class="section"><div class="rule-thick"></div><h3>Lain-lain</h3><div class="rule-thin"></div></div>
+    <div class="news-grid">
+    <div class="news-card" id="card-19" data-cat="lainnya">
+      <div class="stripe stripe-down"></div>
+      <span class="tag">Voli</span>
+      <h4>Tim Voli Putri Indonesia Takluk 1-3 dari Thailand di Pembuka SEA V Women's Cup</h4>
+      <p>Timnas voli putri mengawali perjuangan di SEA V Women's Cup 2026 dengan kekalahan dari Thailand pada pertandingan pembuka.</p>
+      <div class="foot"><span><span class="date-main">10 Agu</span> · <span class="source">Antara</span></span><a class="read-more" href="https://m.antaranews.com/berita/5674964/indonesia-takluk-dari-thailand-pada-pembuka-sea-v-womens-cup-2026" target="_blank" rel="noopener">Baca</a></div>
+    </div>
+    <div class="news-card" id="card-20" data-cat="lainnya">
+      <div class="stripe stripe-flat"></div>
+      <span class="tag">Asian Games</span>
+      <h4>Indonesia Kirim 432 Atlet dari 35 Cabang ke Asian Games Aichi-Nagoya 2026</h4>
+      <p>Komite Olimpiade Indonesia menetapkan 432 atlet untuk bertanding di Asian Games 2026, menyiapkan kontingen lintas 35 cabang olahraga.</p>
+      <div class="foot"><span><span class="date-main">11 Agu</span> · <span class="source">Kemenpora</span></span><a class="read-more" href="https://www.kemenpora.go.id/tag/prestasi" target="_blank" rel="noopener">Baca</a></div>
     </div>
     </div>
     </section>
