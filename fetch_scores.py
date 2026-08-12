@@ -341,10 +341,14 @@ def parse_timnas():
 def split_window(games, since, until):
     """-> (hasil dalam jendela, jadwal setelah jendela).
 
-    Hasil  = laga yang sudah/sedang dimainkan DAN kickoff-nya di dalam jendela.
-    Jadwal = laga belum dimainkan yang kickoff-nya setelah jendela berakhir.
-    Laga di luar jendela yang sudah selesai sengaja DIBUANG — jendela skor harus
-    sama persis dengan jendela berita.
+    Hasil  = laga yang SUDAH/SEDANG dimainkan dengan kickoff >= since.
+             (Tanpa batas atas: refresh sore 18:00/22:00 harus menangkap laga
+             malam yang selesai SETELAH `until`, supaya papan skor tidak basi.
+             Pada run pagi 11:00 hasilnya identik dengan batas ketat, karena
+             belum ada laga yang selesai setelah 11:00 hari itu.)
+    Jadwal = laga belum dimainkan dengan kickoff >= until.
+    Laga di luar jendela yang sudah selesai SEBELUM since sengaja DIBUANG —
+    jendela skor harus konsisten dengan jendela berita.
     """
     hasil, jadwal = [], []
     for g in games:
@@ -352,7 +356,7 @@ def split_window(games, since, until):
         if dt is None:
             continue
         played = g["state"] in ("post", "in")
-        if since <= dt < until and played:
+        if dt >= since and played:
             hasil.append(g)
         elif dt >= until and not played:
             jadwal.append(g)
