@@ -219,7 +219,7 @@ def render(scores, css, news=None, preview=False):
 {sport_filter_btns(present)}
     </div>
     <div id="scoreboard-body"></div>
-    <div class="score-note">Sepakbola dibatasi pada klub besar Eropa; hasil memakai jendela waktu yang sama dengan berita. Sumber: ESPN &amp; TheSportsDB · snapshot diperbarui otomatis pukul 11:00, 18:00, dan 22:00 WIB.</div>
+    <div class="score-note">Sepakbola dibatasi pada klub besar Eropa; hasil memakai jendela waktu yang sama dengan berita. Sumber: ESPN &amp; TheSportsDB · snapshot diperbarui otomatis setiap hari kerja pukul 11:00 WIB.</div>
   </div>
 
   <!-- NEWS SLICERS -->
