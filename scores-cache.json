@@ -1,200 +1,25 @@
 {
- "window": "14 Agu 11:00 → 18 Agu 2026 11:00 WIB",
- "since": "2026-08-14T11:00:00+07:00",
- "until": "2026-08-18T11:00:00+07:00",
- "updated": "18 Agu 2026 11:05 WIB",
+ "window": "18 Agu 11:28 → 19 Agu 2026 11:00 WIB",
+ "since": "2026-08-18T11:28:00+07:00",
+ "until": "2026-08-19T11:00:00+07:00",
+ "updated": "19 Agu 2026 11:29 WIB",
  "results": [
-  {
-   "sport": "sepakbola",
-   "label": "Liga Spanyol",
-   "kind": "match",
-   "games": [
-    {
-     "h": "Deportivo",
-     "a": "Elche",
-     "hs": "1",
-     "as": "1",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/90.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-18",
-     "ts": "2026-08-17T19:00Z"
-    },
-    {
-     "h": "Espanyol",
-     "a": "Levante",
-     "hs": "3",
-     "as": "0",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-17",
-     "ts": "2026-08-16T17:00Z"
-    },
-    {
-     "h": "Racing Santander",
-     "a": "Villarreal",
-     "hs": "2",
-     "as": "2",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/87.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-16T15:00Z"
-    },
-    {
-     "h": "Sevilla",
-     "a": "Rayo Vallecano",
-     "hs": "2",
-     "as": "1",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-15T19:30Z"
-    },
-    {
-     "h": "Alavés",
-     "a": "Getafe",
-     "hs": "3",
-     "as": "0",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-15T17:30Z"
-    }
-   ]
-  },
   {
    "sport": "sepakbola",
    "label": "Persahabatan Klub",
    "kind": "match",
    "games": [
     {
-     "h": "Liverpool",
-     "a": "Como",
-     "hs": "2",
-     "as": "0",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-17",
-     "ts": "2026-08-16T17:00Z"
-    },
-    {
-     "h": "Newcastle United",
-     "a": "Strasbourg",
-     "hs": "1",
-     "as": "1",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/180.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-16T15:00Z"
-    },
-    {
-     "h": "Schalke 04",
-     "a": "Real Madrid",
-     "hs": "0",
-     "as": "3",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-16T15:00Z"
-    },
-    {
-     "h": "FC Basel",
-     "a": "Barcelona",
-     "hs": "2",
-     "as": "5",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/989.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-16T14:30Z"
-    },
-    {
-     "h": "Tottenham Hotspur",
-     "a": "TSG Hoffenheim",
-     "hs": "2",
-     "as": "2",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-16T11:00Z"
-    },
-    {
-     "h": "Liverpool",
-     "a": "Como",
-     "hs": "0",
-     "as": "0",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-16T10:30Z"
-    },
-    {
-     "h": "Internazionale",
-     "a": "Real Betis",
-     "hs": "1",
-     "as": "0",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-15T17:30Z"
-    },
-    {
-     "h": "Borussia Dortmund",
-     "a": "AS Roma",
-     "hs": "2",
-     "as": "2",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-15",
-     "ts": "2026-08-15T15:30Z"
-    },
-    {
-     "h": "Fulham",
-     "a": "VfB Stuttgart",
-     "hs": "1",
-     "as": "0",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-15",
-     "ts": "2026-08-15T15:00Z"
-    },
-    {
-     "h": "Manchester United",
-     "a": "AC Milan",
+     "h": "1. FC Heidenheim 1846",
+     "a": "Bayern Munich",
      "hs": "2",
      "as": "4",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/6418.png",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
      "st": "Selesai",
      "state": "post",
-     "d": "2026-08-15",
-     "ts": "2026-08-15T14:45Z"
+     "d": "2026-08-18",
+     "ts": "2026-08-18T16:00Z"
     }
    ]
   },
@@ -206,11 +31,11 @@
     {
      "st": "Selesai",
      "state": "post",
-     "d": "2026-08-16",
-     "ts": "2026-08-15T21:30Z",
-     "note": "UFC 330: Makhachev vs. Machado Garry",
-     "h": "Jeremiah Wells",
-     "a": "Myktybek Orolbai",
+     "d": "2026-08-19",
+     "ts": "2026-08-18T23:00Z",
+     "note": "Dana White's Contender Series: Season 10, Week 2",
+     "h": "Roman Puga",
+     "a": "Taner Trembley",
      "hs": null,
      "as": null,
      "hl": "",
@@ -236,6 +61,18 @@
      "state": "pre",
      "d": "2026-08-20",
      "ts": "2026-08-19T19:00Z"
+    },
+    {
+     "h": "Rayo Vallecano",
+     "a": "Alavés",
+     "hs": null,
+     "as": null,
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
+     "st": "21 Agu 02:00 WIB",
+     "state": "pre",
+     "d": "2026-08-21",
+     "ts": "2026-08-20T19:00Z"
     }
    ]
   },
@@ -245,36 +82,28 @@
    "kind": "match",
    "games": [
     {
-     "h": "1. FC Heidenheim 1846",
-     "a": "Bayern Munich",
+     "h": "Ponferradina",
+     "a": "Real Madrid Castilla",
      "hs": null,
      "as": null,
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/6418.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
-     "st": "18 Agu 23:00 WIB",
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/5463.png",
+     "al": "",
+     "st": "20 Agu 01:00 WIB",
      "state": "pre",
-     "d": "2026-08-18",
-     "ts": "2026-08-18T16:00Z"
-    }
-   ]
-  },
-  {
-   "sport": "mma",
-   "label": "UFC / MMA",
-   "kind": "bout",
-   "games": [
+     "d": "2026-08-20",
+     "ts": "2026-08-19T18:00Z"
+    },
     {
-     "st": "19 Agu 06:00 WIB",
-     "state": "pre",
-     "d": "2026-08-19",
-     "ts": "2026-08-18T23:00Z",
-     "note": "Dana White's Contender Series: Season 10, Week 2",
-     "h": "Roman Puga",
-     "a": "Taner Trembley",
+     "h": "Real Madrid Castilla",
+     "a": "Zamora CF",
      "hs": null,
      "as": null,
      "hl": "",
-     "al": ""
+     "al": "",
+     "st": "21 Agu 01:00 WIB",
+     "state": "pre",
+     "d": "2026-08-21",
+     "ts": "2026-08-20T18:00Z"
     }
    ]
   }
