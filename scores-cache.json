@@ -1,50 +1,9 @@
 {
- "window": "18 Agu 11:28 → 19 Agu 2026 11:00 WIB",
- "since": "2026-08-18T11:28:00+07:00",
- "until": "2026-08-19T11:00:00+07:00",
- "updated": "19 Agu 2026 11:29 WIB",
+ "window": "19 Agu 12:05 → 20 Agu 2026 11:00 WIB",
+ "since": "2026-08-19T12:05:00+07:00",
+ "until": "2026-08-20T11:00:00+07:00",
+ "updated": "20 Agu 2026 11:08 WIB",
  "results": [
-  {
-   "sport": "sepakbola",
-   "label": "Persahabatan Klub",
-   "kind": "match",
-   "games": [
-    {
-     "h": "1. FC Heidenheim 1846",
-     "a": "Bayern Munich",
-     "hs": "2",
-     "as": "4",
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/6418.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-18",
-     "ts": "2026-08-18T16:00Z"
-    }
-   ]
-  },
-  {
-   "sport": "mma",
-   "label": "UFC / MMA",
-   "kind": "bout",
-   "games": [
-    {
-     "st": "Selesai",
-     "state": "post",
-     "d": "2026-08-19",
-     "ts": "2026-08-18T23:00Z",
-     "note": "Dana White's Contender Series: Season 10, Week 2",
-     "h": "Roman Puga",
-     "a": "Taner Trembley",
-     "hs": null,
-     "as": null,
-     "hl": "",
-     "al": ""
-    }
-   ]
-  }
- ],
- "fixtures": [
   {
    "sport": "sepakbola",
    "label": "Liga Spanyol",
@@ -53,26 +12,14 @@
     {
      "h": "Atlético Madrid",
      "a": "Málaga",
-     "hs": null,
-     "as": null,
+     "hs": "2",
+     "as": "0",
      "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
      "al": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
-     "st": "20 Agu 02:00 WIB",
-     "state": "pre",
+     "st": "Selesai",
+     "state": "post",
      "d": "2026-08-20",
      "ts": "2026-08-19T19:00Z"
-    },
-    {
-     "h": "Rayo Vallecano",
-     "a": "Alavés",
-     "hs": null,
-     "as": null,
-     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
-     "st": "21 Agu 02:00 WIB",
-     "state": "pre",
-     "d": "2026-08-21",
-     "ts": "2026-08-20T19:00Z"
     }
    ]
   },
@@ -84,15 +31,93 @@
     {
      "h": "Ponferradina",
      "a": "Real Madrid Castilla",
-     "hs": null,
-     "as": null,
+     "hs": "2",
+     "as": "2",
      "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/5463.png",
      "al": "",
-     "st": "20 Agu 01:00 WIB",
-     "state": "pre",
+     "st": "Selesai",
+     "state": "post",
      "d": "2026-08-20",
      "ts": "2026-08-19T18:00Z"
+    }
+   ]
+  }
+ ],
+ "fixtures": [
+  {
+   "sport": "sepakbola",
+   "label": "Liga Inggris",
+   "kind": "match",
+   "games": [
+    {
+     "h": "Arsenal",
+     "a": "Coventry City",
+     "hs": null,
+     "as": null,
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/388.png",
+     "st": "22 Agu 02:00 WIB",
+     "state": "pre",
+     "d": "2026-08-22",
+     "ts": "2026-08-21T19:00Z"
+    }
+   ]
+  },
+  {
+   "sport": "sepakbola",
+   "label": "Liga Spanyol",
+   "kind": "match",
+   "games": [
+    {
+     "h": "Rayo Vallecano",
+     "a": "Alavés",
+     "hs": null,
+     "as": null,
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
+     "st": "21 Agu 02:00 WIB",
+     "state": "pre",
+     "d": "2026-08-21",
+     "ts": "2026-08-20T19:00Z"
     },
+    {
+     "h": "Real Betis",
+     "a": "Real Sociedad",
+     "hs": null,
+     "as": null,
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+     "st": "22 Agu 02:00 WIB",
+     "state": "pre",
+     "d": "2026-08-22",
+     "ts": "2026-08-21T19:00Z"
+    }
+   ]
+  },
+  {
+   "sport": "sepakbola",
+   "label": "Liga Prancis",
+   "kind": "match",
+   "games": [
+    {
+     "h": "Marseille",
+     "a": "Strasbourg",
+     "hs": null,
+     "as": null,
+     "hl": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+     "al": "https://a.espncdn.com/i/teamlogos/soccer/500/180.png",
+     "st": "22 Agu 01:45 WIB",
+     "state": "pre",
+     "d": "2026-08-22",
+     "ts": "2026-08-21T18:45Z"
+    }
+   ]
+  },
+  {
+   "sport": "sepakbola",
+   "label": "Persahabatan Klub",
+   "kind": "match",
+   "games": [
     {
      "h": "Real Madrid Castilla",
      "a": "Zamora CF",
